@@ -198,6 +198,27 @@ void loop() {
       wave(i, 1);
     }
   }
+  
+  for(int i = 0; i < 6; i++){
+    shift(4,0,1);
+    shift(4,1,1);
+  }
+
+  for(int i = 0; i < 6; i++){
+    shift(4,2,1);
+    shift(4,3,1);
+  }
+  
+  for(int j = 0; j < 2; j++){
+    for(int i = 0; i < 6; i++){
+      if(i % 2 == 0 || i == 0){
+        shift(i,2,1);
+      }
+      else{
+        shift(i,3,1);
+      }
+    } 
+  }
 }
 
 void rainbow(int time){
@@ -207,35 +228,45 @@ void rainbow(int time){
   }
 }
 
-//0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
-void shift(int c, int way){
+// way: 0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
+// type: 0 - all on, 1 - on/off
+void shift(int c, int way, int type=0){
   int time = 100;
   colorChoice(c);
   
   if(way == 0){
     for(int z = 1; z <= 4; z++){
      delay(time);
-      for(int x = 1; x <= 4; x++){
-        for(int y = 1; y <= 4; y++){
-         led(x, y, z, color[0], color[1], color[2]);
-        } 
-      }
+     if(type == 1){
+      cube(0,0,0); 
+     }
+     for(int x = 1; x <= 4; x++){
+       for(int y = 1; y <= 4; y++){
+        led(x, y, z, color[0], color[1], color[2]);
+       } 
+     }
     }
     delay(time);
   }
   else if(way == 1){
     for(int z = 4; z >= 1; z--){
      delay(time);
-      for(int x = 1; x <= 4; x++){
-       for(int y = 1; y <= 4; y++){
-        led(x, y, z, color[0], color[1], color[2]);
-       }  
-      }
+     if(type == 1){
+      cube(0,0,0); 
+     }
+     for(int x = 1; x <= 4; x++){
+      for(int y = 1; y <= 4; y++){
+       led(x, y, z, color[0], color[1], color[2]);
+      }  
+     }
     }
    }
   else if(way == 2){
     for(int x = 1; x <= 4; x++){
-    delay(time);
+      delay(time);
+      if(type == 1){
+       cube(0,0,0); 
+      }
       for(int z = 1; z <= 4; z++){
        for(int y = 1; y <= 4; y++){
         led(x, y, z, color[0], color[1], color[2]);
@@ -245,13 +276,20 @@ void shift(int c, int way){
   }
   else if(way == 3){
     for(int x = 4; x >= 1; x--){
-    delay(time);
+     delay(time);
+     if(type == 1){
+      cube(0,0,0); 
+     }
      for(int z = 1; z <= 4; z++){
       for(int y = 1; y <= 4; y++){
        led(x, y, z, color[0], color[1], color[2]);
       } 
      }
     }
+  }
+  
+  if(type == 1){
+   cube(0,0,0); 
   }
 }
 
