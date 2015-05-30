@@ -173,7 +173,7 @@ void loop() {
   shift(4,3);
   
   for(int i = 0; i < 6; i++){ 
-    if(i % 2 == 0){
+    if(i % 2 == 0 || i == 0){
       shift(i, 2);
     }
     else{
@@ -183,13 +183,21 @@ void loop() {
   
   cube(0,0,0);
     
-  //haven't gotten here yet
+  wave(0,0);
+  wave(3,1);
+  wave(4,0);
+  wave(0,1);
+  wave(3,0);
+  wave(4,1);
     
-  for(int i = 0; i < 3; i++){
-      wave(i);
+  for(int i = 0; i < 6; i++){
+    if(i % 2 == 0 || i == 0){
+      wave(i, 0);
+    }
+    else{
+      wave(i, 1);
+    }
   }
-  
-  rainbowWave();
 }
 
 void rainbow(int time){
