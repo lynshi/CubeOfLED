@@ -10,6 +10,7 @@ int level = 0;
 byte red0[8], red1[8], red2[8], red3[8], red4[8];
 byte green0[8], green1[8], green2[8], green3[8], green4[8];
 byte blue0[8], blue1[8], blue2[8], blue3[8], blue4[8];
+int color[3]; //color[0] - red, color[1] - green, color[2] - blue
 
 int BAMBit, BAMCounter = 0;
 
@@ -449,6 +450,51 @@ void wave(int color){
   }
   delay(time);
   cube(0,0,0);
+}
+
+//non pattern code
+//
+//
+//
+//
+//
+//
+//
+//
+///
+
+//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5
+void colorChoice(int c){
+  resetColor();
+  switch(c){
+   case 0:
+    color[0] = 15;
+    break;
+   case 1:
+    color[0] = 18;
+    color[1] = 4;
+    break;
+   case 2:
+    color[0] = 15;
+    color[1] = 9;
+    break;
+   case 3:
+    color[1] = 15;
+    break;
+   case 4:
+    color[2] = 15;
+    break;
+   case 5:
+    color[0] = 9;
+    color[2] = 15;
+    break;
+  }
+}
+
+void resetColor(){
+ for(int i = 0; i < 3; i++){
+  color[i] = 0;
+ } 
 }
 
 void cube(byte red, byte green, byte blue) {
