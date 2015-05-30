@@ -10,6 +10,8 @@ int level = 0;
 byte red0[8], red1[8], red2[8], red3[8], red4[8];
 byte green0[8], green1[8], green2[8], green3[8], green4[8];
 byte blue0[8], blue1[8], blue2[8], blue3[8], blue4[8];
+int color[3]; //color[0] - red, color[1] - green, color[2] - blue
+  
 
 int BAMBit, BAMCounter = 0;
 
@@ -137,16 +139,28 @@ void loop() {
   }
   
   for(int i = 0; i < 4; i++){
-    cube(0,0,0);
     rainbow(1050-250*i);
   }
   
-  for(int i = 0; i < 3; i++){ //0 - red, 1 - green, 2 - blue
-    cube(0,0,0);
-    vertical(i);
+  cube(0,0,0);
+  shift(0,0);
+  cube(0,0,0);
+  shift(3,0);
+  cube(0,0,0);
+  shift(4,0);
+  
+  
+  
+  for(int i = 0; i < 6; i++){ 
+    if(i % 2 == 0){
+      shift(i, 0);
+    }
+    else{
+      shift(i, 1);
+    }
   }
   
-  allVertical();
+  //haven't gotten here yet
   
   for(int i = 0; i < 3; i++){ //0 - red, 1 - green, 2 - blue
     cube(0,0,0);
@@ -155,188 +169,106 @@ void loop() {
   
   allHorizontal();
   
-    cube(0,0,0);
+  for(int i = 0; i < 2; i++){
+    rainbowHorizontal();
+  }
+  
+  cube(0,0,0);
     
-    for(int i = 0; i < 3; i++){
+  for(int i = 0; i < 3; i++){
       wave(i);
-    }
+  }
+  
+  rainbowWave();
 }
 
 void rainbow(int time){
-  cube(15,0,0);
-  delay(time);
-  cube(18,4,0);
-  delay(time);
-  cube(15,9,0);
-  delay(time);
-  cube(0,15,0);
-  delay(time);
-  cube(0,0,15);
-  delay(time);
-  cube(9,0,15);
-  delay(time);
+  for(int i = 0; i < 6; i++){
+    colorChoice[i];
+    cube(color[0], color[1], color[2]);
+  }
 }
 
-void vertical(int color){
-  int r = 0, g = 0, b = 0;
+//0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
+void shift(int c, int way){
   int time = 100;
+  colorChoice(c);
   
-  switch(color){
+  if(way == 0){
+    for(int z = 1; z <= 4; z++){
+     delay(time);
+      for(int x = 1; x <= 4; x++){
+        for(int y = 1; y <= 4; y++){
+         led(x, y, z, color[0], color[1], color[2]);
+        } 
+      }
+    }
+    delay(time);
+  }
+  else if(way == 1){
+    for(int z = 4; z >= 1; z--){
+     delay(time);
+      for(int x = 1; x <= 4; x++){
+       for(int y = 1; y <= 4; y++){
+        led(x, y, z, color[0], color[1], color[2]);
+       }  
+      }
+    }
+   }
+  else if(way == 2){
+    for(int x = 1; x <= 4; x++){
+    delay(time);
+      for(int z = 1; z <= 4; z++){
+       for(int y = 1; y <= 4; y++){
+        led(x, y, z, color[0], color[1], color[2]);
+       } 
+      }
+    }
+  }
+  else if(way == 3){
+    for(int x = 4; x >= 1; x--){
+    delay(time);
+     for(int z = 1; z <= 4; z++){
+      for(int y = 1; y <= 4; y++){
+       led(x, y, z, 0, 15, 0);
+      } 
+     }
+    }
+  }
+}
+
+//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5
+void colorChoice(int c){
+  resetColor();
+  switch(c){
    case 0:
-     r = 15;
-     break;
+    color[0] = 15;
+    break;
    case 1:
-     g = 15;
-     break;
+    color[0] = 18;
+    color[1] = 4;
+    break;
    case 2:
-     b = 15;
-     break; 
+    color[0] = 15;
+    color[1] = 9;
+    break;
+   case 3:
+    color[1] = 15;
+    break;
+   case 4:
+    color[2] = 15;
+    break;
+   case 5:
+    color[0] = 9;
+    color[2] = 15;
+    break;
   }
-  
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, r, g, b);
-     } 
-    }
-  }
-  delay(time);
 }
 
-void allVertical(){
-  int time = 100;
-  
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  delay(time);
-}
-
-void horizontal(int color){
-  int r = 0, g = 0, b = 0;
-  int time = 100;
-  
-  switch(color){
-   case 0:
-     r = 15;
-     break;
-   case 1:
-     g = 15;
-     break;
-   case 2:
-     b = 15;
-     break; 
-  }
-  
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, r, g, b);
-     } 
-    }
-  }
-  delay(time);
-}
-
-void allHorizontal(){
-  int time = 100;
-  
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  delay(time);
+void resetColor(){
+ for(int i = 0; i < 3; i++){
+  color[i] = 0;
+ } 
 }
 
 void wave(int color){
@@ -450,6 +382,18 @@ void wave(int color){
   delay(time);
   cube(0,0,0);
 }
+
+//not my code
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 void colorMorph(int time) {
   int red, green, blue;
