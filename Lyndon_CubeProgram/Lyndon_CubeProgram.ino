@@ -232,60 +232,42 @@ void rainbow(int time){
 // type: 0 - all on, 1 - on/off
 void shift(int c, int way, int type=0){
   int time = 100;
-  colorChoice(c);
   
   if(way == 0){
-    for(int z = 1; z <= 4; z++){
-     delay(time);
-     if(type == 1){
-      cube(0,0,0); 
-     }
-     for(int x = 1; x <= 4; x++){
-       for(int y = 1; y <= 4; y++){
-        led(x, y, z, color[0], color[1], color[2]);
-       } 
-     }
-    }
-    delay(time);
-  }
-  else if(way == 1){
-    for(int z = 4; z >= 1; z--){
-     delay(time);
-     if(type == 1){
-      cube(0,0,0); 
-     }
-     for(int x = 1; x <= 4; x++){
-      for(int y = 1; y <= 4; y++){
-       led(x, y, z, color[0], color[1], color[2]);
-      }  
-     }
-    }
-   }
-  else if(way == 2){
-    for(int x = 1; x <= 4; x++){
+    for(int i = 1; i <= 4; i++){
+      z_layer(i, c);
       delay(time);
       if(type == 1){
-       cube(0,0,0); 
-      }
-      for(int z = 1; z <= 4; z++){
-       for(int y = 1; y <= 4; y++){
-        led(x, y, z, color[0], color[1], color[2]);
-       } 
+        cube(0,0,0);
       }
     }
   }
+  else if(way == 1){
+     for(int i = 4; i >= 1; i--){
+       z_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
+     }
+  }
+  else if(way == 2){
+     for(int i = 1; i <= 4; i++){
+       x_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
+     }
+  }
   else if(way == 3){
-    for(int x = 4; x >= 1; x--){
-     delay(time);
-     if(type == 1){
-      cube(0,0,0); 
+     for(int i = 4; i >= 1; i--){
+       x_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
      }
-     for(int z = 1; z <= 4; z++){
-      for(int y = 1; y <= 4; y++){
-       led(x, y, z, color[0], color[1], color[2]);
-      } 
-     }
-    }
   }
   
   if(type == 1){
@@ -776,31 +758,37 @@ void ledTest(int time) {
   }// Color
 }
 
-void x_layer(int layer, byte red, byte green, byte blue) {
-  // Cycle throug layer
+void x_layer(int layer, int c) {
+  // Cycle through layer
+  colorChoice(c);
+  
   for(int z = 1; z <= 4; z++) {
     // Cycle through LEDs
     for(int y = 1; y <= 4; y++) {
-      led(layer, y, z, red, green, blue);
+      led(layer, y, z, color[0], color[1], color[2]);
     } // LEDs
   }
 }
 
-void y_layer(int layer, byte red, byte green, byte blue) {
+void y_layer(int layer, int c) {
   // Cycle throug layer
+  colorChoice(c);
+  
   for(int z = 1; z <= 4; z++) {
     // Cycle through LEDs
     for(int x = 1; x <= 4; x++) {
-      led(x, layer, z, red, green, blue);
+      led(x, layer, z, color[0], color[1], color[2]);
     } // LEDs
   }
 }
 
-void z_layer(int layer, byte red, byte green, byte blue) {
+void z_layer(int layer, int c) {
   // Cycle through LEDs
+  colorChoice(c);
+  
   for(int y = 1; y <= 4; y++) {
     for(int x = 1; x <= 4; x++) {
-      led(x, y, layer, red, green, blue);
+      led(x, y, layer, color[0], color[1], color[2]);
     } // LEDs
   }
 }
