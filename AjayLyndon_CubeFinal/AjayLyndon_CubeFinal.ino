@@ -137,58 +137,94 @@ void loop() {
     firstRun = 0;
   }
   
-
+  breathe(0);
+  delay(500);
+  breathe(1);
+  delay(500);
+  breathe(2);
+  delay(500);
   
   for(int i = 0; i < 2; i++){
    rainbow(550-250*i); 
   }
   
   cube(0,0,0);
-  shift(0,0,0);
+  shift(0,0,0,100);
   cube(0,0,0);
-  shift(3,0,0);
+  shift(3,0,0,100);
   cube(0,0,0);
-  shift(4,0,0);
+  shift(4,0,0,100);
   
-  shift(0,0,0);
-  shift(3,1,0);
-  shift(4,0,0);
-  shift(0,1,0);
-  shift(3,0,0);
-  shift(4,1,0);
+  shift(0,0,0,100);
+  shift(3,1,0,100);
+  shift(4,0,0,100);
+  shift(0,1,0,100);
+  shift(3,0,0,100);
+  shift(4,1,0,100);
   
   for(int i = 0; i < 6; i++){ 
     if(i % 2 == 0 || i == 0){
-      shift(i, 0,0);
+      shift(i,0,0,100);
     }
     else{
-      shift(i, 1,0);
+      shift(i,1,0,100);
     }
   }
   
-  shift(0,2,0);
-  shift(3,3,0);
-  shift(4,2,0);
-  shift(0,3,0);
-  shift(3,2,0);
-  shift(4,3,0);
+  shift(0,2,0,100);
+  shift(3,3,0,100);
+  shift(4,2,0,100);
+  shift(0,3,0,100);
+  shift(3,2,0,100);
+  shift(4,3,0,100);
   
   for(int i = 0; i < 6; i++){ 
     if(i % 2 == 0 || i == 0){
-      shift(i, 2,0);
+      shift(i,2,0,100);
     }
     else{
-      shift(i, 3,0);
+      shift(i,3,0,100);
     }
   }
+  
+  cube(0,0,0);
+  
+  for(int i = 0; i < 2; i++){
+    shift(4,0,1,100);
+    shift(4,1,1,100);
+  }
+
+  for(int i = 0; i < 2; i++){
+    shift(4,2,1,100);
+    shift(4,3,1,100);
+  }
+  
+   for(int i = 0; i < 6; i++){
+     if(i % 2 == 0 || i == 0){
+       shift(i,2,1,100);
+     }
+     else{
+       shift(i,3,1,100);
+     }
+   } 
+
+   for(int i = 0; i < 6; i++){
+     if(i % 2 == 0 || i == 0){
+       shift(i,0,1,100);
+     }
+     else{
+       shift(i,1,1,100);
+     }
+   } 
+
   
   cube(0,0,0);
     
   wave(0,0);
-  wave(3,1);
-  wave(4,0);
   wave(0,1);
   wave(3,0);
+  wave(3,1);
+  wave(4,0);
   wave(4,1);
     
   for(int i = 0; i < 6; i++){
@@ -200,39 +236,21 @@ void loop() {
     }
   }
   
-  for(int i = 0; i < 2; i++){
-    shift(4,0,1);
-    shift(4,1,1);
-  }
+  diag(75,15,0,0);
+  revdiag(75,0,0,0);
+  delay(500);
+  diag(75,0, 15,0);
+  revdiag(75,0,0,0);
+  delay(500);
+  diag(75,0,0,15);
+  revdiag(75,0,0,0);
+  delay(500);
+  diag(75,15,0,0);
+  revdiag(75,0,15,0);
+  diag(75,0,0,15);
+  revdiag(75,0,0,0);
 
   for(int i = 0; i < 2; i++){
-    shift(4,2,1);
-    shift(4,3,1);
-  }
-  
-  for(int j = 0; j < 2; j++){
-    for(int i = 0; i < 6; i++){
-      if(i % 2 == 0 || i == 0){
-        shift(i,2,1);
-      }
-      else{
-        shift(i,3,1);
-      }
-    } 
-  }
-  
-  for(int j = 0; j < 2; j++){
-    for(int i = 0; i < 6; i++){
-      if(i % 2 == 0 || i == 0){
-        shift(i,0,1);
-      }
-      else{
-        shift(i,1,1);
-      }
-    } 
-  }
-
-  for(int i = 0; i < 3; i++){
     for(int j = 0; j < 6; j++){
       randomness(random(8,64), 0, j);
       delay(250);
@@ -240,13 +258,7 @@ void loop() {
     }
   }
   
-  for(int j = 0; j < 6; j++){
-    randomness(random(8,64), 50, j);
-    delay(50);
-    cube(0,0,0);
-  }
-  
-  for(int j = 0; j < 5; j++){
+  for(int j = 0; j < 3; j++){
     randomness(random(8,64), 50, 6);
     delay(50);
     cube(0,0,0);
@@ -257,6 +269,35 @@ void loop() {
     delay(0);
     cube(0,0,0);
   }
+  
+  for(int j = 0; j < 6; j++){
+    randomness(random(0,24), 50, j);
+    delay(50);
+    cube(0,0,0);
+  }
+  
+  for(int i = 0; i < 6; i++){
+    explode(75,i);
+    delay(150);
+  }
+  
+  breathe(0);
+  delay(500);
+  breathe(1);
+  delay(500);
+  breathe(2);
+  delay(500);
+  
+  shift(0,0,0,50);
+  shift(6,1,0,100);
+  shift(3,0,0,150);
+  shift(6,1,0,200);
+  shift(4,0,0,250);
+  shift(6,1,0,300);
+  
+  explode(100,4);
+  
+  delay(5000);
 }
 
 void rainbow(int time){  
@@ -269,8 +310,7 @@ void rainbow(int time){
 
 // way: 0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
 // type: 0 - all on, 1 - on/off
-void shift(int c, int way, int type){
-  int time = 100;
+void shift(int c, int way, int type, int time){
   
   if(way == 0){
     for(int i = 1; i <= 4; i++){
@@ -413,8 +453,315 @@ void randomness(int lights, int time, int c){
   }
 }
 
+void explode(int time, int c)
+{
+     ledcol(3,3,1,c);
+     ledcol(2,3,1,c);
+     ledcol(3,2,1,c);
+     ledcol(2,2,1,c);
+     
+     delay(time*2.5);
+     ledcol(2,2,2,c);
+     ledcol(3,3,2,c);   
+     ledcol(2,3,2,c);
+     ledcol(3,2,2,c);
+     delay(time*2.25);
+     ledcol(3,3,1,6);
+     ledcol(2,3,1,6);
+     ledcol(3,2,1,6);
+     ledcol(2,2,1,6);
+     ledcol(2,2,3,c);
+     ledcol(3,3,3,c);   
+     ledcol(2,3,3,c);
+     ledcol(3,2,3,c);
+     delay(time*1.7);
+      ledcol(2,2,4,c);
+     ledcol(3,3,4,c);   
+     ledcol(2,3,4,c);
+     ledcol(3,2,4,c);
+     ledcol(3,3,2,6);
+     ledcol(2,3,2,6);
+     ledcol(3,2,2,6);
+     ledcol(2,2,2,6);
+     delay(time*1);
+     z_layer(4,c);
+     delay(time);
+     ledcol(1,1,3,c);
+     ledcol(1,2,3,c);
+     ledcol(1,3,3,c);
+     ledcol(1,4,3,c);
+     ledcol(2,1,3,c);
+     ledcol(3,1,3,c);
+     ledcol(4,1,3,c);
+     ledcol(4,2,3,c);
+     ledcol(4,3,3,c);
+     ledcol(4,4,3,c);
+     ledcol(2,4,3,c);
+     ledcol(3,4,3,c);
+     ledcol(3,3,3,6);
+     ledcol(2,3,3,6);
+     ledcol(3,2,3,6);
+     ledcol(2,2,3,6);
+     delay(time*1);
+     ledcol(1,1,2,c);
+     ledcol(1,2,2,c);
+     ledcol(1,3,2,c);
+     ledcol(1,4,2,c);
+     ledcol(2,1,2,c);
+     ledcol(3,1,2,c);
+     ledcol(4,1,2,c);
+     ledcol(4,2,2,c);
+     ledcol(4,3,2,c);
+     ledcol(4,4,2,c);
+     ledcol(2,4,2,c);
+     ledcol(3,4,2,c);
+     z_layer(4,6);
+     delay(time);
+     ledcol(1,1,1,c);
+     ledcol(1,2,1,c);
+     ledcol(1,3,1,c);
+     ledcol(1,4,1,c);
+     ledcol(2,1,1,c);
+     ledcol(3,1,1,c);
+     ledcol(4,1,1,c);
+     ledcol(4,2,1,c);
+     ledcol(4,3,1,c);
+     ledcol(4,4,1,c);
+     ledcol(2,4,1,c);
+     ledcol(3,4,1,c);
+     z_layer(3,6);
+     delay(time);
+     z_layer(2,6);
+     delay(time);
+     z_layer(1,6);
+     delay(time);
+}
+  
+
+
+void diag(int time,int r, int g, int b)
+{
+   
+  led(1,1,1,r,g,b);
+  delay(time);
+  led(2,1,1,r,g,b);
+  led(1,2,1,r,g,b);
+  led(1,1,2,r,g,b);
+  delay(time);
+  led(2,2,1,r,g,b);
+  led(2,1,2,r,g,b);
+  led(1,2,2,r,g,b);
+  led(3,1,1,r,g,b);
+  led(1,3,1,r,g,b);
+  led(1,1,3,r,g,b);
+  delay(time);
+  led(2,2,2,r,g,b);
+  led(3,1,2,r,g,b);
+  led(1,3,2,r,g,b);
+  led(2,3,1,r,g,b);
+  led(3,2,1,r,g,b);
+  led(2,1,3,r,g,b);
+  led(1,2,3,r,g,b);
+  led(1,4,1,r,g,b);
+  led(1,1,4,r,g,b);
+  led(4,1,1,r,g,b);
+  delay(time);
+  led(4,2,1,r,g,b);
+  led(4,1,2,r,g,b);
+  led(1,2,4,r,g,b);
+  led(1,4,2,r,g,b);
+  led(2,4,1,r,g,b);
+  led(2,1,4,r,g,b);
+  led(1,3,3,r,g,b);
+  led(3,1,3,r,g,b);
+  led(3,3,1,r,g,b);
+  led(2,2,3,r,g,b);
+  led(2,3,2,r,g,b);
+  led(2,3,2,r,g,b);
+  led(3,2,2,r,g,b);
+  
+  delay(time);
+  led(1,3,4,r,g,b);
+  led(3,1,4,r,g,b);
+  led(2,2,4,r,g,b);
+  led(1,4,3,r,g,b);
+  led(4,1,3,r,g,b);
+  led(2,3,3,r,g,b);
+  led(3,2,3,r,g,b);
+  led(4,2,2,r,g,b);
+  led(2,4,2,r,g,b);
+  led(3,3,2,r,g,b);
+  led(3,4,1,r,g,b);
+  led(4,3,1,r,g,b);
+  delay(time);
+  led(4,4,1,r,g,b);
+  led(3,4,2,r,g,b);
+  led(4,3,2,r,g,b);
+  led(2,4,3,r,g,b);
+  led(4,2,3,r,g,b);
+  led(3,3,3,r,g,b);
+  led(1,4,4,r,g,b);
+  led(4,1,4,r,g,b);
+  led(2,3,4,r,g,b);
+  led(3,2,4,r,g,b);
+  delay(time);
+  led(4,4,2,r,g,b);
+  led(3,4,3,r,g,b);
+  led(4,3,3,r,g,b);
+  led(4,4,2,r,g,b);
+  led(2,4,4,r,g,b);
+  led(4,2,4,r,g,b);
+  led(3,3,4,r,g,b);
+  delay(time);
+  led(4,4,3,r,g,b);
+  led(3,4,4,r,g,b);
+  led(4,4,2,r,g,b);
+  led(4,3,4,r,g,b);
+  delay(time);
+  led(4,4,4,r,g,b);
+  delay(time*2);  
+}
+void revdiag(int time, int r, int g, int b)
+{
+  led(4,4,4,r,g,b);
+  delay(time);
+  led(4,4,3,r,g,b);
+  led(3,4,4,r,g,b);
+  led(4,4,2,r,g,b);
+  led(4,3,4,r,g,b);
+  delay(time);
+  led(4,4,2,r,g,b);
+  led(3,4,3,r,g,b);
+  led(4,3,3,r,g,b);
+  led(4,4,2,r,g,b);
+  led(2,4,4,r,g,b);
+  led(4,2,4,r,g,b);
+  led(3,3,4,r,g,b);
+  delay(time);
+  led(4,4,1,r,g,b);
+  led(3,4,2,r,g,b);
+  led(4,3,2,r,g,b);
+  led(2,4,3,r,g,b);
+  led(4,2,3,r,g,b);
+  led(3,3,3,r,g,b);
+  led(1,4,4,r,g,b);
+  led(4,1,4,r,g,b);
+  led(2,3,4,r,g,b);
+  led(3,2,4,r,g,b);
+  delay(time);
+  led(1,3,4,r,g,b);
+  led(3,1,4,r,g,b);
+  led(2,2,4,r,g,b);
+  led(1,4,3,r,g,b);
+  led(4,1,3,r,g,b);
+  led(2,3,3,r,g,b);
+  led(3,2,3,r,g,b);
+  led(4,2,2,r,g,b);
+  led(2,4,2,r,g,b);
+  led(3,3,2,r,g,b);
+  led(3,4,1,r,g,b);
+  led(4,3,1,r,g,b);
+  delay(time);
+  led(4,2,1,r,g,b);
+  led(4,1,2,r,g,b);
+  led(1,2,4,r,g,b);
+  led(1,4,2,r,g,b);
+  led(2,4,1,r,g,b);
+  led(2,1,4,r,g,b);
+  led(1,3,3,r,g,b);
+  led(3,1,3,r,g,b);
+  led(3,3,1,r,g,b);
+  led(2,2,3,r,g,b);
+  led(2,3,2,r,g,b);
+  led(2,3,2,r,g,b);
+  led(3,2,2,r,g,b);
+  delay(time);
+   led(2,2,2,r,g,b);
+  led(3,1,2,r,g,b);
+  led(1,3,2,r,g,b);
+  led(2,3,1,r,g,b);
+  led(3,2,1,r,g,b);
+  led(2,1,3,r,g,b);
+  led(1,2,3,r,g,b);
+  led(1,4,1,r,g,b);
+  led(1,1,4,r,g,b);
+  led(4,1,1,r,g,b);
+  delay(time);
+  led(2,2,1,r,g,b);
+  led(2,1,2,r,g,b);
+  led(1,2,2,r,g,b);
+  led(3,1,1,r,g,b);
+  led(1,3,1,r,g,b);
+  led(1,1,3,r,g,b);
+  delay(time);
+  led(2,1,1,r,g,b);
+  led(1,2,1,r,g,b);
+  led(1,1,2,r,g,b);
+  delay(time);
+  led(1,1,1,r,g,b);
+  delay(time*2);
+  
+  
+  
+ 
+  
+ 
+  
+}
+void breathe(int color)
+{
+  switch(color)
+  {
+  case 0:
+    for(int i = 0; i<20; i++)
+ {
+  cube(i,0,0);
+ delay(20); 
+ }
+ delay(400);
+  for(int i = 20; i>=0; i--)
+ {
+  cube(i,0,0);
+ delay(20); 
+ }
+ delay(400);
+    break;
+    case 1:
+    for(int i = 0; i<20; i++)
+ {
+  cube(0,i,0);
+ delay(20); 
+ }
+ delay(400);
+  for(int i = 20; i>=0; i--)
+ {
+  cube(0,i,0);
+ delay(50); 
+ }
+ delay(400);
+    break;
+    case 2:
+    for(int i = 0; i<20; i++)
+ {
+  cube(0,0,i);
+ delay(20); 
+ }
+ delay(400);
+  for(int i = 20; i>=0; i--)
+ {
+  cube(0,0,i);
+ delay(20); 
+ }
+ delay(400);
+    break;
+    
+  }
+  
+
+}
+
 //non pattern code
-//checkConstrains(), cube(), and led() were copied, layer (x,y,z) functions were modified, everything else we wrote
+//checkConstrains(), cube(), ledrun() and led() were copied, layer (x,y,z) functions were modified, everything else we wrote
 //
 //
 //
@@ -563,4 +910,441 @@ int checkConstrains(int value, int min, int max) {
   } else {
     return value;
   }
+}
+
+void ledrun(int time) {
+  // Cycle throug color
+
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,1,15,0,0);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,1,15,0,0);
+      delay(time);
+      led(i,2,1,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,1,15,0,0);
+      delay(time);
+      led(i,3,1,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,4,1,15,0,0);
+      delay(time);
+      led(i,4,1,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,2,15,0,0);
+      delay(time);
+      led(i,4,2,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,2,15,0,0);
+      delay(time);
+      led(i,3,2,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,2,15,0,0);
+      delay(time);
+      led(i,2,2,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,2,15,0,0);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,3,15,0,0);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,3,15,0,0);
+      delay(time);
+      led(i,2,3,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,3,15,0,0);
+      delay(time);
+      led(i,3,3,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,4,3,15,0,0);
+      delay(time);
+      led(i,4,3,0,0,0);
+      delay(time);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,4,15,0,0);
+      delay(time);
+      led(i,4,4,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,4,15,0,0);
+      delay(time);
+      led(i,3,4,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,4,15,0,0);
+      delay(time);
+      led(i,2,4,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,4,15,0,0);
+      delay(time);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,4,0,15,0);
+      delay(time);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,4,0,15,0);
+      delay(time);
+      led(i,2,4,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,4,0,15,0);
+      delay(time);
+      led(i,3,4,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,4,4,0,15,0);
+      delay(time);
+      led(i,4,4,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,3,0,15,0);
+      delay(time);
+      led(i,4,3,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,3,0,15,0);
+      delay(time);
+      led(i,3,3,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,3,0,15,0);
+      delay(time);
+      led(i,2,3,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,3,0,15,0);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,2,0,15,0);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,2,0,15,0);
+      delay(time);
+      led(i,2,2,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,2,0,15,0);
+      delay(time);
+      led(i,3,2,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,4,2,0,15,0);
+      delay(time);
+      led(i,4,2,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,1,0,15,0);
+      delay(time);
+      led(i,4,1,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,1,0,15,0);
+      delay(time);
+      led(i,3,1,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,1,0,15,0);
+      delay(time);
+      led(i,2,1,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,1,0,15,0);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+    }
+    
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,1,0,0,15);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,1,0,0,15);
+      delay(time);
+      led(i,2,1,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,1,0,0,15);
+      delay(time);
+      led(i,3,1,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,4,1,0,0,15);
+      delay(time);
+      led(i,4,1,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,2,0,0,15);
+      delay(time);
+      led(i,4,2,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,2,0,0,15);
+      delay(time);
+      led(i,3,2,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,2,0,0,15);
+      delay(time);
+      led(i,2,2,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,2,0,0,15);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,3,0,0,15);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,2,3,0,0,15);
+      delay(time);
+      led(i,2,3,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,3,3,0,0,15);
+      delay(time);
+      led(i,3,3,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,4,3,0,0,15);
+      delay(time);
+      led(i,4,3,0,0,0);
+      delay(time);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,4,4,0,0,15);
+      delay(time);
+      led(i,4,4,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,3,4,0,0,15);
+      delay(time);
+      led(i,3,4,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,2,4,0,0,15);
+      delay(time);
+      led(i,2,4,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,4,0,0,15);
+      delay(time*2);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,4,15,0,0);
+      delay(time);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,1,3,15,0,0);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,1,2,15,0,0);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,1,15,0,0);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,1,0,15,0);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,1,2,0,15,0);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,1,3,0,15,0);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,4,0,15,0);
+      delay(time);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+    }
+    for(int i = 1; i<5; ++i)
+    {
+      led(i,1,4,0,0,15);
+      delay(time);
+      led(i,1,4,0,0,0);
+      delay(time/2);
+      
+    }
+     for(int i = 4; i>0; --i)
+    {
+      led(i,1,3,0,0,15);
+      delay(time);
+      led(i,1,3,0,0,0);
+      delay(time/2);
+    }
+     for(int i = 1; i<5; ++i)
+    {
+      led(i,1,2,0,0,15);
+      delay(time);
+      led(i,1,2,0,0,0);
+      delay(time/2);
+    } for(int i = 4; i>0; --i)
+    {
+      led(i,1,1,0,0,15);
+      delay(time);
+      led(i,1,1,0,0,0);
+      delay(time/2);
+    }    
+}
+
+void ledcol(int x, int y, int z, int c)
+{
+  
+  colorChoice(c);
+  led(x,y,z,color[0], color[1], color[2]);
+  
 }
