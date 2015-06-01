@@ -137,323 +137,224 @@ void loop() {
     firstRun = 0;
   }
   
-  for(int i = 0; i < 4; i++){
-    cube(0,0,0);
-    rainbow(1050-250*i);
+  for(int i = 0; i < 2; i++){
+   rainbow(550-250*i); 
   }
   
-  for(int i = 0; i < 3; i++){ //0 - red, 1 - green, 2 - blue
-    cube(0,0,0);
-    vertical(i);
+  cube(0,0,0);
+  shift(0,0,0);
+  cube(0,0,0);
+  shift(3,0,0);
+  cube(0,0,0);
+  shift(4,0,0);
+  
+  shift(0,0,0);
+  shift(3,1,0);
+  shift(4,0,0);
+  shift(0,1,0);
+  shift(3,0,0);
+  shift(4,1,0);
+  
+  for(int i = 0; i < 6; i++){ 
+    if(i % 2 == 0 || i == 0){
+      shift(i, 0,0);
+    }
+    else{
+      shift(i, 1,0);
+    }
   }
   
-  allVertical();
+  shift(0,2,0);
+  shift(3,3,0);
+  shift(4,2,0);
+  shift(0,3,0);
+  shift(3,2,0);
+  shift(4,3,0);
   
-  for(int i = 0; i < 3; i++){ //0 - red, 1 - green, 2 - blue
-    cube(0,0,0);
-    horizontal(i);
+  for(int i = 0; i < 6; i++){ 
+    if(i % 2 == 0 || i == 0){
+      shift(i, 2,0);
+    }
+    else{
+      shift(i, 3,0);
+    }
   }
   
-  allHorizontal();
+  cube(0,0,0);
+    
+  wave(0,0);
+  wave(3,1);
+  wave(4,0);
+  wave(0,1);
+  wave(3,0);
+  wave(4,1);
+    
+  for(int i = 0; i < 6; i++){
+    if(i % 2 == 0 || i == 0){
+      wave(i, 0);
+    }
+    else{
+      wave(i, 1);
+    }
+  }
   
+  for(int i = 0; i < 2; i++){
+    shift(4,0,1);
+    shift(4,1,1);
+  }
+
+  for(int i = 0; i < 2; i++){
+    shift(4,2,1);
+    shift(4,3,1);
+  }
+  
+  for(int j = 0; j < 2; j++){
+    for(int i = 0; i < 6; i++){
+      if(i % 2 == 0 || i == 0){
+        shift(i,2,1);
+      }
+      else{
+        shift(i,3,1);
+      }
+    } 
+  }
+}
+
+void rainbow(int time){  
+  for(int i = 0; i < 6; i++){
+    colorChoice(i);
+    cube(color[0],color[1],color[2]);
+    delay(time);
+  }
+}
+
+// way: 0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
+// type: 0 - all on, 1 - on/off
+void shift(int c, int way, int type){
+  int time = 100;
+  
+  if(way == 0){
+    for(int i = 1; i <= 4; i++){
+      z_layer(i, c);
+      delay(time);
+      if(type == 1){
+        cube(0,0,0);
+      }
+    }
+  }
+  else if(way == 1){
+     for(int i = 4; i >= 1; i--){
+       z_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
+     }
+  }
+  else if(way == 2){
+     for(int i = 1; i <= 4; i++){
+       x_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
+     }
+  }
+  else if(way == 3){
+     for(int i = 4; i >= 1; i--){
+       x_layer(i, c);
+       delay(time);
+       if(type == 1){
+         cube(0,0,0);
+       }
+     } 
+  }
+  
+  if(type == 1){
+   cube(0,0,0); 
+  }
+}
+
+void wave(int c, int way){
+  int time = 100;
+  int x, z;
+  
+  colorChoice(c);
+
+  for(int a = 0; a < 2; a++){
+    if(a == 1){
+     if(way == 0){
+      way = 1;
+     } 
+     else if(way == 1){
+      way = 0; 
+     }
+    }
+    
+    x = waveControl(way);
+    for(z = 1; z <= 4; z++){
+        if(z == 1 && a == 1){
+         continue; 
+        }
+        for(int y = 1; y <= 4; y++){
+          led(x, y, z, color[0], color[1], color[2]);
+        }
+        if(way == 0){
+          x++;
+        }
+        else if(way == 1){
+         x--; 
+        }
+    }
+    delay(time);
     cube(0,0,0);
     
-    for(int i = 0; i < 3; i++){
-      wave(i);
-    }
-}
-
-void rainbow(int time){
-  cube(15,0,0);
-  delay(time);
-  cube(18,4,0);
-  delay(time);
-  cube(15,9,0);
-  delay(time);
-  cube(0,15,0);
-  delay(time);
-  cube(0,0,15);
-  delay(time);
-  cube(9,0,15);
-  delay(time);
-}
-
-void vertical(int color){
-  int r = 0, g = 0, b = 0;
-  int time = 100;
-  
-  switch(color){
-   case 0:
-     r = 15;
-     break;
-   case 1:
-     g = 15;
-     break;
-   case 2:
-     b = 15;
+    if(a == 1){
      break; 
-  }
-  
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, r, g, b);
-     } 
+    }
+    
+    for(int i = 0; i < 2; i++){
+      x = 1;
+      for(int j = 1; j <= 4; j++){
+         if(x == 1 || x == 2){
+          if((way == 0 && i == 0) || (way == 1 && i == 1)){
+            z = 2; 
+          }
+          else if((way == 1 && i == 0) || (way == 0 && i == 1)){
+            z = 3; 
+          }
+         }
+         else if(x == 3 || x == 4){
+           if((way == 0 && i == 0) || (way == 1 && i == 1)){
+             z = 3; 
+           }
+           else if((way == 1 && i == 0) || (way == 0 && i == 1)){
+             z = 2; 
+           }
+         }
+         for(int y = 1; y <= 4; y++){
+           led(x, y, z, color[0], color[1], color[2]);
+         }
+         x++;
+      }
+      delay(time);
+      cube(0,0,0);
     }
   }
-  delay(time);
 }
 
-void allVertical(){
-  int time = 100;
-  
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int z = 1; z <= 4; z++){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int z = 4; z >= 1; z--){
-   delay(time);
-    for(int x = 1; x <= 4; x++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  delay(time);
-}
-
-void horizontal(int color){
-  int r = 0, g = 0, b = 0;
-  int time = 100;
-  
-  switch(color){
-   case 0:
-     r = 15;
-     break;
-   case 1:
-     g = 15;
-     break;
-   case 2:
-     b = 15;
-     break; 
-  }
-  
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, r, g, b);
-     } 
-    }
-  }
-  delay(time);
-}
-
-void allHorizontal(){
-  int time = 100;
-  
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 15, 0, 0);
-     } 
-    }
-  }
-  for(int x = 1; x <= 4; x++){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 15, 0);
-     } 
-    }
-  }
-  for(int x = 4; x >= 1; x--){
-   delay(time);
-    for(int z = 1; z <= 4; z++){
-     for(int y = 1; y <= 4; y++){
-      led(x, y, z, 0, 0, 15);
-     } 
-    }
-  }
-  delay(time);
-}
-
-void wave(int color){
-  int r = 0, g = 0, b = 0;
-  int time = 100;
-  int x = 1;
-  
-  switch(color){
-   case 0:
-     r = 15;
-     break;
-   case 1:
-     g = 15;
-     break;
-   case 2:
-     b = 15;
-     break; 
-  }
-  
-  int z = 0;
-  for(z = 1; z <= 4; z++){
-      for(int y = 1; y <= 4; y++){
-        led(x,y,z,r,g,b);
-      }
-      x++;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 1;
-  for(int i = 1; i <= 4; i++){
-     if(x == 1 || x == 2){
-      z = 2; 
-     }
-     else if(x == 3 || x == 4){
-      z = 3; 
-     }
-     for(int y = 1; y <= 4; y++){
-       led(x,y,z,r,g,b);
-     }
-     x++;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 1;
-  for(int i = 1; i <= 4; i++){
-      if(x == 1 || x == 2){
-        z = 3; 
-      }
-      else if(x == 3 || x == 4){
-        z = 2; 
-      }
-      for(int y = 1; y <= 4; y++){
-        led(x,y,z,r,g,b);
-      }
-      x++;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 4;
-  for(z = 1; z <= 4; z++){
-      for(int y = 1; y <= 4; y++){
-        led(x,y,z,r,g,b);
-      }
-      --x;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 1;
-  for(int i = 1; i <= 4; i++){
-      if(x == 1 || x == 2){
-        z = 3; 
-      }
-      else if(x == 3 || x == 4){
-        z = 2; 
-      }
-      for(int y = 1; y <= 4; y++){
-        led(x,y,z,r,g,b);
-      }
-      x++;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 1;
-  for(int i = 1; i <= 4; i++){
-     if(x == 1 || x == 2){
-      z = 2; 
-     }
-     else if(x == 3 || x == 4){
-      z = 3; 
-     }
-     for(int y = 1; y <= 4; y++){
-       led(x,y,z,r,g,b);
-     }
-     x++;
-  }
-  delay(time);
-  cube(0,0,0);
-  
-  x = 1;
-  for(z = 1; z <= 4; z++){
-      for(int y = 1; y <= 4; y++){
-        led(x,y,z,r,g,b);
-      }
-      x++;
-  }
-  delay(time);
-  cube(0,0,0);
+//0 - down/up, 1 - up/down
+int waveControl(int d){
+ if(d == 0){
+  return 1;
+ }
+ else if(d == 1){
+  return 4;
+ }
 }
 
 //non pattern code
-//
+//checkConstrains(), cube(), and led() were copied, layer (x,y,z) functions were modified, everything else we wrote
 //
 //
 //
@@ -463,7 +364,7 @@ void wave(int color){
 //
 ///
 
-//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5
+//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5, all off - 6
 void colorChoice(int c){
   resetColor();
   switch(c){
@@ -488,6 +389,8 @@ void colorChoice(int c){
     color[0] = 9;
     color[2] = 15;
     break;
+   case 6:
+    resetColor();
   }
 }
 
@@ -495,6 +398,41 @@ void resetColor(){
  for(int i = 0; i < 3; i++){
   color[i] = 0;
  } 
+}
+
+void x_layer(int layer, int c) {
+  // Cycle through layer
+  colorChoice(c);
+  
+  for(int z = 1; z <= 4; z++) {
+    // Cycle through LEDs
+    for(int y = 1; y <= 4; y++) {
+      led(layer, y, z, color[0], color[1], color[2]);
+    } // LEDs
+  }
+}
+
+void y_layer(int layer, int c) {
+  // Cycle throug layer
+  colorChoice(c);
+  
+  for(int z = 1; z <= 4; z++) {
+    // Cycle through LEDs
+    for(int x = 1; x <= 4; x++) {
+      led(x, layer, z, color[0], color[1], color[2]);
+    } // LEDs
+  }
+}
+
+void z_layer(int layer, int c) {
+  // Cycle through LEDs
+  colorChoice(c);
+  
+  for(int y = 1; y <= 4; y++) {
+    for(int x = 1; x <= 4; x++) {
+      led(x, y, layer, color[0], color[1], color[2]);
+    } // LEDs
+  }
 }
 
 void cube(byte red, byte green, byte blue) {

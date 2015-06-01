@@ -199,12 +199,12 @@ void loop() {
     }
   }
   
-  for(int i = 0; i < 4; i++){
+  for(int i = 0; i < 2; i++){
     shift(4,0,1);
     shift(4,1,1);
   }
 
-  for(int i = 0; i < 4; i++){
+  for(int i = 0; i < 2; i++){
     shift(4,2,1);
     shift(4,3,1);
   }
@@ -354,7 +354,7 @@ int waveControl(int d){
  }
 }
 
-//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5
+//red - 0, orange - 1, yellow - 2, green - 3, blue - 4, purple - 5, all off - 6
 void colorChoice(int c){
   resetColor();
   switch(c){
@@ -390,7 +390,7 @@ void resetColor(){
  } 
 }
 
-//not my code
+//not my code (layer functions were modified)
 //
 //
 //
