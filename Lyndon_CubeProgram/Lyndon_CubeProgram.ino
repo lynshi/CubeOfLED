@@ -138,46 +138,46 @@ void loop() {
     firstRun = 0;
   }
   
-  for(int i = 0; i < 4; i++){
-    rainbow(1050-250*i);
+  for(int i = 0; i < 2; i++){
+   rainbow(550-250*i); 
   }
   
   cube(0,0,0);
-  shift(0,0);
+  shift(0,0,0);
   cube(0,0,0);
-  shift(3,0);
+  shift(3,0,0);
   cube(0,0,0);
-  shift(4,0);
+  shift(4,0,0);
   
-  shift(0,0);
-  shift(3,1);
-  shift(4,0);
-  shift(0,1);
-  shift(3,0);
-  shift(4,1);
+  shift(0,0,0);
+  shift(3,1,0);
+  shift(4,0,0);
+  shift(0,1,0);
+  shift(3,0,0);
+  shift(4,1,0);
   
   for(int i = 0; i < 6; i++){ 
     if(i % 2 == 0 || i == 0){
-      shift(i, 0);
+      shift(i, 0,0);
     }
     else{
-      shift(i, 1);
+      shift(i, 1,0);
     }
   }
   
-  shift(0,2);
-  shift(3,3);
-  shift(4,2);
-  shift(0,3);
-  shift(3,2);
-  shift(4,3);
+  shift(0,2,0);
+  shift(3,3,0);
+  shift(4,2,0);
+  shift(0,3,0);
+  shift(3,2,0);
+  shift(4,3,0);
   
   for(int i = 0; i < 6; i++){ 
     if(i % 2 == 0 || i == 0){
-      shift(i, 2);
+      shift(i, 2,0);
     }
     else{
-      shift(i, 3);
+      shift(i, 3,0);
     }
   }
   
@@ -199,12 +199,12 @@ void loop() {
     }
   }
   
-  for(int i = 0; i < 6; i++){
+  for(int i = 0; i < 4; i++){
     shift(4,0,1);
     shift(4,1,1);
   }
 
-  for(int i = 0; i < 6; i++){
+  for(int i = 0; i < 4; i++){
     shift(4,2,1);
     shift(4,3,1);
   }
@@ -221,16 +221,17 @@ void loop() {
   }
 }
 
-void rainbow(int time){
+void rainbow(int time){  
   for(int i = 0; i < 6; i++){
-    colorChoice[i];
-    cube(color[0], color[1], color[2]);
+    colorChoice(i);
+    cube(color[0],color[1],color[2]);
+    delay(time);
   }
 }
 
 // way: 0 - down/up, 1 - up/down, 2 - left/right, 3 right/left
 // type: 0 - all on, 1 - on/off
-void shift(int c, int way, int type=0){
+void shift(int c, int way, int type){
   int time = 100;
   
   if(way == 0){
@@ -267,7 +268,7 @@ void shift(int c, int way, int type=0){
        if(type == 1){
          cube(0,0,0);
        }
-     }
+     } 
   }
   
   if(type == 1){
@@ -277,7 +278,7 @@ void shift(int c, int way, int type=0){
 
 void wave(int c, int way){
   int time = 100;
-  int x;
+  int x, z;
   
   colorChoice(c);
 
@@ -293,7 +294,7 @@ void wave(int c, int way){
     
     x = waveControl(way);
     for(z = 1; z <= 4; z++){
-        if(z == 1 %% a == 1){
+        if(z == 1 && a == 1){
          continue; 
         }
         for(int y = 1; y <= 4; y++){
@@ -378,6 +379,8 @@ void colorChoice(int c){
     color[0] = 9;
     color[2] = 15;
     break;
+   case 6:
+    resetColor();
   }
 }
 
