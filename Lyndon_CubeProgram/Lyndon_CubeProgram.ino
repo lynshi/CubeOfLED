@@ -222,15 +222,29 @@ void loop() {
     } 
   }
 
-  for(int j = 0; j < 10; j++){
-    randomness(random(8,56), 0);
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 6; j++){
+      randomness(random(8,64), 0, j);
+      delay(250);
+      cube(0,0,0);
+    }
+  }
+  
+  for(int j = 0; j < 6; j++){
+    randomness(random(8,64), 50, j);
     delay(50);
     cube(0,0,0);
   }
   
-  for(int j = 0; j < 10; j++){
-    randomness(random(8,64), 50);
+  for(int j = 0; j < 5; j++){
+    randomness(random(8,64), 50, 6);
     delay(50);
+    cube(0,0,0);
+  }
+
+  for(int j = 0; j < 25; j++){
+    randomness(random(8,56), 0, 6);
+    delay(0);
     cube(0,0,0);
   }
 }
@@ -368,14 +382,23 @@ int waveControl(int d){
  }
 }
 
-void randomness(int lights, int time){
-  int x, y, z, temp;
+void randomness(int lights, int time, int c){
+  int x, y, z;
+  if(c >= 0 && c <= 5){
+   colorChoice(c); 
+  }
   
   for(int a = 0; a < lights; a++){
    x = random(1,5);
    y = random(1,5);
    z = random(1,5);
-   led(x,y,z,random(0,20),random(0,20),random(0,20));
+   
+   if(c >= 0 && c <= 5){
+     led(x,y,z,color[0],color[1],color[2]);
+   }
+   else if(c == 6){
+     led(x,y,z,random(0,20),random(0,20),random(0,20));
+   }
    delay(time);
   }
 }
