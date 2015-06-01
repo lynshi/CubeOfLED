@@ -10,6 +10,7 @@ int level = 0;
 byte red0[8], red1[8], red2[8], red3[8], red4[8];
 byte green0[8], green1[8], green2[8], green3[8], green4[8];
 byte blue0[8], blue1[8], blue2[8], blue3[8], blue4[8];
+int color[3]; //color[0] - red, color[1] - green, color[2] - blue
 
 int BAMBit, BAMCounter = 0;
 
@@ -134,14 +135,17 @@ void loop() {
   int time = 0;
 
  cube(0,0,0);
+ 
  breathe(0);
  delay(500);
  breathe(1);
  delay(500);
  breathe(2);
  delay(500);
- ledrun(100);
+ ledrun(50);
  delay(100);
+ 
+ //layers(1000);
   diag(75,15,0,0);
   revdiag(75,0,0,0);
   delay(500);
@@ -154,66 +158,119 @@ void loop() {
   diag(75,15,0,0);
   revdiag(75,0,15,0);
   diag(75,0,0,15);
-  diag(75,0,0,0);
-// led(1,1,1,15,0,0);
-  //ledTest(2);
- // colorMorph(5);
- // cube(0,0,0);
-// smoothRain(2, 200, 2, 1);
- //ledrun(2);
- //layers(500);
- // ledrun(100);
- 
-}
-void explode(int time, int r, int g, int b);
-{
-  for(int i = 1; i=4; ++i)
-  {
- led(2,2,2,r g.b);
- led(2,2,3,r,g,b);
- led(3,3,3,r,g,b);
- led(2,3,2,r,g,b);
- led(3,2,2,r,g,b);
- led(2,3,3,r,g,b);
- led(3,2,3,r,g,b);
- led(3,3,2,r,g,b);
- delay(time);
- r = r*2;
- g = g*2;
- b = b*2;
+  revdiag(75,0,0,0);
+  explode(150,0);
+
+ smoothRain(time, 200, 2, 3);
+  delay(500);
+
+  // Colormorph
+  time = 20;
+  for(int red = 0; red <= 31; red++) {
+    cube(red, 0,0);
+    delay(time);
+  }
+  colorMorph(time);
+  for(int red = 31; red >= 0; red--) {
+    cube(red, 0,0);
+    delay(time);
   }
   delay(500);
-   led(2,2,2,0,0,0);
- led(2,2,3,0,0,0);
- led(3,3,3,0,0,0);
- led(2,3,2,0,0,0);
- led(3,2,2,0,0,0);
- led(2,3,3,0,0,0);
- led(3,2,3,0,0,0);
- led(3,3,2,0,0,0);
-  x_layer(1,r,g,b);
-  x_layer(4,r,g,b);
-  y_layer(1,r,g,b);
-  y_layer(4,r,g,b);
-  z_layer(1,r,g,b);
-  z_layer(4,r,g,b);
-  delay(time);
-  z_layer(4,0,0,0);
-  led(2,2,1,0,0,0);
-  led(2,3,1,0,0,0);
-  led(3,2,1,0,0,0);
-  led(3,3,1,0,0,0);
-  delay(time);
-  z_layer(3,0,0,0);
-  delay(time);
-  z_layer(2,0,0,0);
-  delay(time);
-  z_layver(1,0,0,0);
-  delay(time);
+
+  // Blue rain
+  time = 0;
+  smoothRain(time, 200, 2, 2);
+  delay(500);
+
+ 
+}
+void explode(int time, int c)
+{
+     ledcol(3,3,1,c);
+     ledcol(2,3,1,c);
+     ledcol(3,2,1,c);
+     ledcol(2,2,1,c);
+     
+     delay(time*2.5);
+     ledcol(2,2,2,c);
+     ledcol(3,3,2,c);   
+     ledcol(2,3,2,c);
+     ledcol(3,2,2,c);
+     delay(time*2.25);
+     ledcol(3,3,1,6);
+     ledcol(2,3,1,6);
+     ledcol(3,2,1,6);
+     ledcol(2,2,1,6);
+     ledcol(2,2,3,c);
+     ledcol(3,3,3,c);   
+     ledcol(2,3,3,c);
+     ledcol(3,2,3,c);
+     delay(time*1.7);
+      ledcol(2,2,4,c);
+     ledcol(3,3,4,c);   
+     ledcol(2,3,4,c);
+     ledcol(3,2,4,c);
+     ledcol(3,3,2,6);
+     ledcol(2,3,2,6);
+     ledcol(3,2,2,6);
+     ledcol(2,2,2,6);
+     delay(time*1);
+     z_layer(4,c);
+     delay(time);
+     ledcol(1,1,3,c);
+     ledcol(1,2,3,c);
+     ledcol(1,3,3,c);
+     ledcol(1,4,3,c);
+     ledcol(2,1,3,c);
+     ledcol(3,1,3,c);
+     ledcol(4,1,3,c);
+     ledcol(4,2,3,c);
+     ledcol(4,3,3,c);
+     ledcol(4,4,3,c);
+     ledcol(2,4,3,c);
+     ledcol(3,4,3,c);
+     ledcol(3,3,3,6);
+     ledcol(2,3,3,6);
+     ledcol(3,2,3,6);
+     ledcol(2,2,3,6);
+     delay(time*1);
+     ledcol(1,1,2,c);
+     ledcol(1,2,2,c);
+     ledcol(1,3,2,c);
+     ledcol(1,4,2,c);
+     ledcol(2,1,2,c);
+     ledcol(3,1,2,c);
+     ledcol(4,1,2,c);
+     ledcol(4,2,2,c);
+     ledcol(4,3,2,c);
+     ledcol(4,4,2,c);
+     ledcol(2,4,2,c);
+     ledcol(3,4,2,c);
+     z_layer(4,6);
+     delay(time);
+     ledcol(1,1,1,c);
+     ledcol(1,2,1,c);
+     ledcol(1,3,1,c);
+     ledcol(1,4,1,c);
+     ledcol(2,1,1,c);
+     ledcol(3,1,1,c);
+     ledcol(4,1,1,c);
+     ledcol(4,2,1,c);
+     ledcol(4,3,1,c);
+     ledcol(4,4,1,c);
+     ledcol(2,4,1,c);
+     ledcol(3,4,1,c);
+     z_layer(3,6);
+     delay(time);
+     z_layer(2,6);
+     delay(time);
+     z_layer(1,6);
+     delay(time);
 }
   
-}
-void diag(int time,int r, int b, int g)
+
+
+void diag(int time,int r, int g, int b)
 {
    
   led(1,1,1,r,g,b);
@@ -295,7 +352,8 @@ void diag(int time,int r, int b, int g)
   led(4,4,4,r,g,b);
   delay(time*2);  
 }
-void revdiag(int time, int r, int g, int b);
+void revdiag(int time, int r, int g, int b)
+{
   led(4,4,4,r,g,b);
   delay(time);
   led(4,4,3,r,g,b);
@@ -355,7 +413,7 @@ void revdiag(int time, int r, int g, int b);
   led(2,3,1,r,g,b);
   led(3,2,1,r,g,b);
   led(2,1,3,r,g,b);
-  led(1,2,3,r,0,b);
+  led(1,2,3,r,g,b);
   led(1,4,1,r,g,b);
   led(1,1,4,r,g,b);
   led(4,1,1,r,g,b);
@@ -386,46 +444,46 @@ void breathe(int color)
   switch(color)
   {
   case 0:
-    for(int i = 0; i<25; i++)
+    for(int i = 0; i<20; i++)
  {
   cube(i,0,0);
- delay(100); 
+ delay(20); 
  }
- delay(1000);
-  for(int i = 25; i>=0; i--)
+ delay(400);
+  for(int i = 20; i>=0; i--)
  {
   cube(i,0,0);
- delay(100); 
+ delay(20); 
  }
- delay(1000);
+ delay(400);
     break;
     case 1:
-    for(int i = 0; i<25; i++)
+    for(int i = 0; i<20; i++)
  {
   cube(0,i,0);
- delay(100); 
+ delay(20); 
  }
- delay(1000);
-  for(int i = 25; i>=0; i--)
+ delay(400);
+  for(int i = 20; i>=0; i--)
  {
   cube(0,i,0);
- delay(100); 
+ delay(50); 
  }
- delay(1000);
+ delay(400);
     break;
     case 2:
-    for(int i = 0; i<25; i++)
+    for(int i = 0; i<20; i++)
  {
   cube(0,0,i);
- delay(100); 
+ delay(20); 
  }
- delay(1000);
-  for(int i = 25; i>=0; i--)
+ delay(400);
+  for(int i = 20; i>=0; i--)
  {
   cube(0,0,i);
- delay(100); 
+ delay(20); 
  }
- delay(1000);
+ delay(400);
     break;
     
   }
@@ -1223,52 +1281,104 @@ void ledrun(int time) {
     
     
 }
+void colorChoice(int c){
+  resetColor();
+  switch(c){
+   case 0:
+    color[0] = 15;
+    break;
+   case 1:
+    color[0] = 18;
+    color[1] = 4;
+    break;
+   case 2:
+    color[0] = 15;
+    color[1] = 9;
+    break;
+   case 3:
+    color[1] = 15;
+    break;
+   case 4:
+    color[2] = 15;
+    break;
+   case 5:
+    color[0] = 9;
+    color[2] = 15;
+    break;
+    case 6:
+    color[0] = 0;
+    color[1] = 0;
+    color[2] = 0;
+    break;
+  }
+}
+
+void resetColor(){
+ for(int i = 0; i < 3; i++){
+  color[i] = 0;
+ } 
+}
 void layers( int time)
 {
- z_layer(1,0,0,15); 
+ z_layer(1,4); 
  delay(time);
- z_layer(2,0,0,15);
+ z_layer(2,4);
  delay(time);
- z_layer(3,0,0,15);
+ z_layer(3,4);
  delay(time);
- z_layer(4,0,0,15);
+ z_layer(4,4);
  delay(time);
- z_layer(4,0,15,0); 
+ z_layer(4,3); 
  delay(time);
- z_layer(3,0,15,0);
+ z_layer(3,3);
  delay(time);
- z_layer(2,0,15,0);
+ z_layer(2,3);
  delay(time);
- z_layer(1,0,15,0);
+ z_layer(1,3);
  delay(time);
   
 }
 
-void x_layer(int layer, byte red, byte green, byte blue) {
-  // Cycle throug layer
+
+void ledcol(int x, int y, int z, int c)
+{
+  
+  colorChoice(c);
+  led(x,y,z,color[0], color[1], color[2]);
+  
+}
+
+void x_layer(int layer, int c) {
+  // Cycle through layer
+  colorChoice(c);
+  
   for(int z = 1; z <= 4; z++) {
     // Cycle through LEDs
     for(int y = 1; y <= 4; y++) {
-      led(layer, y, z, red, green, blue);
+      led(layer, y, z, color[0], color[1], color[2]);
     } // LEDs
   }
 }
 
-void y_layer(int layer, byte red, byte green, byte blue) {
+void y_layer(int layer, int c) {
   // Cycle throug layer
+  colorChoice(c);
+  
   for(int z = 1; z <= 4; z++) {
     // Cycle through LEDs
     for(int x = 1; x <= 4; x++) {
-      led(x, layer, z, red, green, blue);
+      led(x, layer, z, color[0], color[1], color[2]);
     } // LEDs
   }
 }
 
-void z_layer(int layer, byte red, byte green, byte blue) {
+void z_layer(int layer, int c) {
   // Cycle through LEDs
+  colorChoice(c);
+  
   for(int y = 1; y <= 4; y++) {
     for(int x = 1; x <= 4; x++) {
-      led(x, y, layer, red, green, blue);
+      led(x, y, layer, color[0], color[1], color[2]);
     } // LEDs
   }
 }
