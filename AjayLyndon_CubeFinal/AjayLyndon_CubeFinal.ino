@@ -37,7 +37,7 @@ void setup(){
   SPI.begin();//start up the SPI library
 
   interrupts();//let the show begin, this lets the multiplexing start
-  
+  randomSeed(analogRead(0));
 }
 ISR(TIMER1_COMPA_vect){
   // Seems to have no impact on flickering, will make the cube brighter if commented out
@@ -137,6 +137,8 @@ void loop() {
     firstRun = 0;
   }
   
+
+  
   for(int i = 0; i < 2; i++){
    rainbow(550-250*i); 
   }
@@ -217,6 +219,43 @@ void loop() {
         shift(i,3,1);
       }
     } 
+  }
+  
+  for(int j = 0; j < 2; j++){
+    for(int i = 0; i < 6; i++){
+      if(i % 2 == 0 || i == 0){
+        shift(i,0,1);
+      }
+      else{
+        shift(i,1,1);
+      }
+    } 
+  }
+
+  for(int i = 0; i < 3; i++){
+    for(int j = 0; j < 6; j++){
+      randomness(random(8,64), 0, j);
+      delay(250);
+      cube(0,0,0);
+    }
+  }
+  
+  for(int j = 0; j < 6; j++){
+    randomness(random(8,64), 50, j);
+    delay(50);
+    cube(0,0,0);
+  }
+  
+  for(int j = 0; j < 5; j++){
+    randomness(random(8,64), 50, 6);
+    delay(50);
+    cube(0,0,0);
+  }
+
+  for(int j = 0; j < 25; j++){
+    randomness(random(8,56), 0, 6);
+    delay(0);
+    cube(0,0,0);
   }
 }
 
@@ -351,6 +390,27 @@ int waveControl(int d){
  else if(d == 1){
   return 4;
  }
+}
+
+void randomness(int lights, int time, int c){
+  int x, y, z;
+  if(c >= 0 && c <= 5){
+   colorChoice(c); 
+  }
+  
+  for(int a = 0; a < lights; a++){
+   x = random(1,5);
+   y = random(1,5);
+   z = random(1,5);
+   
+   if(c >= 0 && c <= 5){
+     led(x,y,z,color[0],color[1],color[2]);
+   }
+   else if(c == 6){
+     led(x,y,z,random(0,20),random(0,20),random(0,20));
+   }
+   delay(time);
+  }
 }
 
 //non pattern code
