@@ -37,6 +37,7 @@ void setup(){
   SPI.begin();//start up the SPI library
 
   interrupts();//let the show begin, this lets the multiplexing start
+  randomSeed(analogRead(0));
   
 }
 ISR(TIMER1_COMPA_vect){
@@ -131,58 +132,146 @@ ISR(TIMER1_COMPA_vect){
 
 int firstRun = 1;
 
-void loop() {  
-  int time = 0;
+void loop() {
+cube(0,0,0);
+roll(200,1);
 
- cube(0,0,0);
+
  
- breathe(0);
- delay(500);
- breathe(1);
- delay(500);
- breathe(2);
- delay(500);
- ledrun(50);
- delay(100);
- 
- //layers(1000);
-  diag(75,15,0,0);
-  revdiag(75,0,0,0);
-  delay(500);
-  diag(75,0, 15,0);
-  revdiag(75,0,0,0);
-  delay(500);
-  diag(75,0,0,15);
-  revdiag(75,0,0,0);
-  delay(500);
-  diag(75,15,0,0);
-  revdiag(75,0,15,0);
-  diag(75,0,0,15);
-  revdiag(75,0,0,0);
-  explode(150,0);
 
- smoothRain(time, 200, 2, 3);
-  delay(500);
-
-  // Colormorph
-  time = 20;
-  for(int red = 0; red <= 31; red++) {
-    cube(red, 0,0);
-    delay(time);
+}
+void outrand(int time)
+{
+  for(int i = 0; i<2; i++)
+  {
+   led(1, random(1,5),random(1,5),random(5,16),random(5,16),random(5,16));
+   led(random(1,5),1 ,random(1,5),random(5,16),random(5,16),random(5,16));
+   delay(time);
+   cube(0,0,0);
+   led(4, random(1,5),random(1,5),random(5,16),random(5,16),random(5,16));
+   led(random(1,5), 4,random(1,5),random(5,16),random(5,16),random(5,16) );
+   delay(time);
   }
-  colorMorph(time);
-  for(int red = 31; red >= 0; red--) {
-    cube(red, 0,0);
-    delay(time);
-  }
-  delay(500);
+  
+  
+}
+void roll(int time, int c)
+{
+  int x = 1;
+  int y = 1;
 
-  // Blue rain
-  time = 0;
-  smoothRain(time, 200, 2, 2);
-  delay(500);
+    for(y;y<5;y++)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
+    for(x=2;x<5;x++)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
 
- 
+    for(y=3;y>0;y--)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
+
+    for(x=3;x>0;x--)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    } 
+}
+void colmove(int time, int c)
+{
+  int x = 1;
+  int y = 1;
+
+    for(y;y<5;y++)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+    for(x=2;x<5;x++)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+
+    for(y=3;y>0;y--)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+
+    for(x=3;x>0;x--)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    } 
 }
 void explode(int time, int c)
 {
