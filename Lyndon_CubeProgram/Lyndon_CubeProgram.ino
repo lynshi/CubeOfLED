@@ -138,115 +138,34 @@ void loop() {
     firstRun = 0;
   }
   
+  streams(5,750);
+  paths(5,750);
+}
 
-  
-  for(int i = 0; i < 2; i++){
-   rainbow(550-250*i); 
-  }
-  
-  cube(0,0,0);
-  shift(0,0,0);
-  cube(0,0,0);
-  shift(3,0,0);
-  cube(0,0,0);
-  shift(4,0,0);
-  
-  shift(0,0,0);
-  shift(3,1,0);
-  shift(4,0,0);
-  shift(0,1,0);
-  shift(3,0,0);
-  shift(4,1,0);
-  
-  for(int i = 0; i < 6; i++){ 
-    if(i % 2 == 0 || i == 0){
-      shift(i, 0,0);
-    }
-    else{
-      shift(i, 1,0);
-    }
-  }
-  
-  shift(0,2,0);
-  shift(3,3,0);
-  shift(4,2,0);
-  shift(0,3,0);
-  shift(3,2,0);
-  shift(4,3,0);
-  
-  for(int i = 0; i < 6; i++){ 
-    if(i % 2 == 0 || i == 0){
-      shift(i, 2,0);
-    }
-    else{
-      shift(i, 3,0);
-    }
-  }
-  
-  cube(0,0,0);
-    
-  wave(0,0);
-  wave(3,1);
-  wave(4,0);
-  wave(0,1);
-  wave(3,0);
-  wave(4,1);
-    
-  for(int i = 0; i < 6; i++){
-    if(i % 2 == 0 || i == 0){
-      wave(i, 0);
-    }
-    else{
-      wave(i, 1);
-    }
-  }
-  
-  for(int i = 0; i < 2; i++){
-    shift(4,0,1);
-    shift(4,1,1);
-  }
+void streams(int c, int time){
+ colorChoice(c);
+ for(int a = 0; a < 6; a++){
+   for(int i = 1; i <= 4; i++){
+    led(color[0],color[1],color[2],1,i,4);
+    led(color[0],color[1],color[2],i,1,2);
+    led(color[0],color[1],color[2],4,(5-i),3); 
+    led(color[0],color[1],color[2],4,4,(5-i));
+    led(color[0],color[1],color[2],2,3,i);
+    led(color[0],color[1],color[2],(5-i),3,2);
+    led(color[0],color[1],color[2],2,(5-i),1);
+    led(color[0],color[1],color[2],i,4,3);
+    led(color[0],color[1],color[2],3,2,(5-i)); 
+    led(color[0],color[1],color[2],2,1,i);
+    led(color[0],color[1],color[2],3,i,2);
+    led(color[0],color[1],color[2],(5-i),2,3);
+    delay(time);
+   }
+ }
+}
 
-  for(int i = 0; i < 2; i++){
-    shift(4,2,1);
-    shift(4,3,1);
-  }
+void paths(int c, int time){
+  colorChoice(c);
   
-  for(int j = 0; j < 2; j++){
-    for(int i = 0; i < 6; i++){
-      if(i % 2 == 0 || i == 0){
-        shift(i,2,1);
-      }
-      else{
-        shift(i,3,1);
-      }
-    } 
-  }
-
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 6; j++){
-      randomness(random(8,64), 0, j);
-      delay(250);
-      cube(0,0,0);
-    }
-  }
-  
-  for(int j = 0; j < 6; j++){
-    randomness(random(8,64), 50, j);
-    delay(50);
-    cube(0,0,0);
-  }
-  
-  for(int j = 0; j < 5; j++){
-    randomness(random(8,64), 50, 6);
-    delay(50);
-    cube(0,0,0);
-  }
-
-  for(int j = 0; j < 25; j++){
-    randomness(random(8,56), 0, 6);
-    delay(0);
-    cube(0,0,0);
-  }
 }
 
 void rainbow(int time){  
