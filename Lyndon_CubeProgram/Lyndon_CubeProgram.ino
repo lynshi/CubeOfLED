@@ -139,13 +139,38 @@ void loop() {
   }
   
   //streams(4,750);
-  cube(0,0,0);
-  paths(4,100,0,0);
-  cube(0,0,0);
-  paths(4,100,1,1);
-  cube(0,0,0);
-  overPaths(100);
-  cube(0,0,0);
+//  cube(0,0,0);
+//  paths(4,100,0,0);
+//  cube(0,0,0);
+//  paths(4,100,1,1);
+//  cube(0,0,0);
+//  overPaths(100);
+//  cube(0,0,0);
+
+  for(int i = 1; i <= 4; i++){
+   column(i,1,0,4);
+   delay(1000);
+  }
+}
+
+void column(int x, int y, int z, int c){ //x,y,z - whichever is 0 is cycled
+  colorChoice(c);
+  
+  if(x == 0){
+    for(int i = 1; i <= 4; i++){
+     led(i,y,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if(y == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,i,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if (z == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,y,i,color[0],color[1],color[2]); 
+    }
+  }
 }
 
 void overPaths(int time){
