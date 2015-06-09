@@ -138,63 +138,71 @@ void loop() {
     firstRun = 0;
   }
   
-  streams(5,750);
-  paths(5,500,0,0);
-  paths(5,500,1,1);
-  overPaths();
+  //streams(4,750);
+  cube(0,0,0);
+  paths(4,100,0,0);
+  cube(0,0,0);
+  paths(4,100,1,1);
+  cube(0,0,0);
+  overPaths(100);
+  cube(0,0,0);
 }
 
-void overPaths(){
-  colorChoice(0);
-  led(color[0],color[1],color[2],1,1,1);
-  
-  for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],i,1,1);
-    led(color[0],color[1],color[2],1,i,1);
-    led(color[0],color[1],color[2],1,1,i);
-    delay(time);
-  }
-  
-  c = addColor(1,c);
+void overPaths(int time){
+  int c = 0;
   colorChoice(c);
   
-  for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],i,4,1);
-    led(color[0],color[1],color[2],1,i,4);
-    led(color[0],color[1],color[2],i,1,4);
-    led(color[0],color[1],color[2],4,i,1);
+  for(int x = 0; x < 5; x++){
+    led(1,1,1,color[0],color[1],color[2]);
     delay(time);
-  }
-  
-  c = addColor(1,c);
-  colorChoice(c);
-  
-  for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,4,(5-i)); 
-    led(color[0],color[1],color[2],4,4,i);
-    led(color[0],color[1],color[2],4,1,(5-i));
-    delay(time);
-  }
-  
-  c = addColor(1,c);
-  colorChoice(c);
-  
-  for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,(5-i),1);
-    led(color[0],color[1],color[2],(5-i),4,4);
-    led(color[0],color[1],color[2],4,(5-i),4);
-    led(color[0],color[1],color[2],(5-i),1,1);
-    delay(time);
-  }
-  
-  c = addColor(1,c);
-  colorChoice(c);
-  
-  for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,(5-i),4);
-    led(color[0],color[1],color[2],1,1,1);
-    led(color[0],color[1],color[2],(5-i),1,4);
-    delay(time);
+    
+    for(int i = 2; i <= 4; i++){
+      led(i,1,1,color[0],color[1],color[2]);
+      led(1,i,1,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
+      delay(time);
+    }
+    
+    if(x > 0){
+      for(int i = 2; i <= 4; i++){
+        led(i,4,1,color[0],color[1],color[2]);
+        led(1,i,4,color[0],color[1],color[2]);
+        led(i,1,4,color[0],color[1],color[2]);
+        led(4,i,1,color[0],color[1],color[2]);
+        delay(time);
+      }
+      
+      if(x > 1){ 
+        for(int i = 2; i <= 4; i++){
+          led(1,4,(5-i),color[0],color[1],color[2]); 
+          led(4,4,i,color[0],color[1],color[2]);
+          led(4,1,(5-i),color[0],color[1],color[2]);
+          delay(time);
+        }
+        
+        if(x > 2){
+          for(int i = 2; i <= 4; i++){
+            led(1,(5-i),1,color[0],color[1],color[2]);
+            led((5-i),4,4,color[0],color[1],color[2]);
+            led(4,(5-i),4,color[0],color[1],color[2]);
+            led((5-i),1,1,color[0],color[1],color[2]);
+            delay(time);
+          }
+          
+          if(x > 3){
+            for(int i = 2; i <= 3; i++){
+              led(1,(5-i),4,color[0],color[1],color[2]);
+              led(1,1,1,color[0],color[1],color[2]);
+              led((5-i),1,4,color[0],color[1],color[2]);
+              delay(time);
+            }
+          }
+        }
+      }
+    }
+
+    c = addColor(1,c);
+    colorChoice(c);
   }
 }
 
@@ -202,41 +210,44 @@ void streams(int c, int time){
  colorChoice(c);
  for(int a = 0; a < 6; a++){
    for(int i = 1; i <= 4; i++){
-    led(color[0],color[1],color[2],1,i,4);
-    led(color[0],color[1],color[2],i,1,2);
-    led(color[0],color[1],color[2],4,(5-i),3); 
-    led(color[0],color[1],color[2],4,4,(5-i));
-    led(color[0],color[1],color[2],2,3,i);
-    led(color[0],color[1],color[2],(5-i),3,2);
-    led(color[0],color[1],color[2],2,(5-i),1);
-    led(color[0],color[1],color[2],i,4,3);
-    led(color[0],color[1],color[2],3,2,(5-i)); 
-    led(color[0],color[1],color[2],2,1,i);
-    led(color[0],color[1],color[2],3,i,2);
-    led(color[0],color[1],color[2],(5-i),2,3);
+    led(1,i,4,color[0],color[1],color[2]);
+    led(i,1,2,color[0],color[1],color[2]);
+    led(4,(5-i),3,color[0],color[1],color[2]); 
+    led(4,4,(5-i),color[0],color[1],color[2]);
+    led(2,3,i,color[0],color[1],color[2]);
+    led((5-i),3,2,color[0],color[1],color[2]);
+    led(2,(5-i),1,color[0],color[1],color[2]);
+    led(i,4,3,color[0],color[1],color[2]);
+    led(3,2,(5-i),color[0],color[1],color[2]); 
+    led(2,1,i,color[0],color[1],color[2]);
+    led(3,i,2,color[0],color[1],color[2]);
+    led((5-i),2,3,color[0],color[1],color[2]);
     delay(time);
+    cube(0,0,0);
    }
  }
 }
 
 void paths(int c, int time, int type, int s){ //if type == 1 then paths change color, if s == 1, keep all on, if s == 0 turn off
   colorChoice(c);
-  led(color[0],color[1],color[2],1,1,1);
+  led(1,1,1,color[0],color[1],color[2]);
+  delay(time);
   
   for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],i,1,1);
-    led(color[0],color[1],color[2],1,i,1);
-    led(color[0],color[1],color[2],1,1,i);
+    led(i,1,1,color[0],color[1],color[2]);
+    led(1,i,1,color[0],color[1],color[2]);
+    led(1,1,i,color[0],color[1],color[2]);
     delay(time);
   }
   
   if(s == 0){
     colorChoice(6); 
-    led(color[0],color[1],color[2],1,1,1);
+    led(1,1,1,color[0],color[1],color[2]);
+    delay(time);
     for(int i = 2; i <= 4; i++){
-      led(color[0],color[1],color[2],i,1,1);
-      led(color[0],color[1],color[2],1,i,1);
-      led(color[0],color[1],color[2],1,1,i);
+      led(i,1,1,color[0],color[1],color[2]);
+      led(1,i,1,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
       delay(time);
     }
   }
@@ -244,28 +255,30 @@ void paths(int c, int time, int type, int s){ //if type == 1 then paths change c
   c = addColor(type,c);
   colorChoice(c);
   
-  led(color[0],color[1],color[2],1,4,1);
-  led(color[0],color[1],color[2],1,1,4);
-  led(color[0],color[1],color[2],4,1,1);
+  led(1,4,1,color[0],color[1],color[2]);
+  led(1,1,4,color[0],color[1],color[2]);
+  led(4,1,1,color[0],color[1],color[2]);
+  delay(time);
   
   for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],i,4,1);
-    led(color[0],color[1],color[2],1,i,4);
-    led(color[0],color[1],color[2],i,1,4);
-    led(color[0],color[1],color[2],4,i,1);
+    led(i,4,1,color[0],color[1],color[2]);
+    led(1,i,4,color[0],color[1],color[2]);
+    led(i,1,4,color[0],color[1],color[2]);
+    led(4,i,1,color[0],color[1],color[2]);
     delay(time);
   }
   
   if(s == 0){
     colorChoice(6); 
-    led(color[0],color[1],color[2],1,4,1);
-    led(color[0],color[1],color[2],1,1,4);
-    led(color[0],color[1],color[2],4,1,1);
+    led(1,4,1,color[0],color[1],color[2]);
+    led(1,1,4,color[0],color[1],color[2]);
+    led(4,1,1,color[0],color[1],color[2]);
+    delay(time);
     for(int i = 2; i <= 4; i++){
-      led(color[0],color[1],color[2],i,4,1);
-      led(color[0],color[1],color[2],1,i,4);
-      led(color[0],color[1],color[2],i,1,4);
-      led(color[0],color[1],color[2],4,i,1);
+      led(i,4,1,color[0],color[1],color[2]);
+      led(1,i,4,color[0],color[1],color[2]);
+      led(i,1,4,color[0],color[1],color[2]);
+      led(4,i,1,color[0],color[1],color[2]);
       delay(time);
     }
   }
@@ -273,26 +286,28 @@ void paths(int c, int time, int type, int s){ //if type == 1 then paths change c
   c = addColor(type,c);
   colorChoice(c);
   
-  led(color[0],color[1],color[2],1,4,4); 
-  led(color[0],color[1],color[2],4,4,1);
-  led(color[0],color[1],color[2],4,1,4);
+  led(1,4,4,color[0],color[1],color[2]); 
+  led(4,4,1,color[0],color[1],color[2]);
+  led(4,1,4,color[0],color[1],color[2]);
+  delay(time);
   
   for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,4,(5-i)); 
-    led(color[0],color[1],color[2],4,4,i);
-    led(color[0],color[1],color[2],4,1,(5-i));
+    led(1,4,(5-i),color[0],color[1],color[2]); 
+    led(4,4,i,color[0],color[1],color[2]);
+    led(4,1,(5-i),color[0],color[1],color[2]);
     delay(time);
   }
   
   if(s == 0){
     colorChoice(6); 
-    led(color[0],color[1],color[2],1,4,4); 
-    led(color[0],color[1],color[2],4,4,1);
-    led(color[0],color[1],color[2],4,1,4);
+    led(1,4,4,color[0],color[1],color[2]); 
+    led(4,4,1,color[0],color[1],color[2]);
+    led(4,1,4,color[0],color[1],color[2]);
+    delay(time);
     for(int i = 2; i <= 4; i++){
-      led(color[0],color[1],color[2],1,4,(5-i)); 
-      led(color[0],color[1],color[2],4,4,i);
-      led(color[0],color[1],color[2],4,1,(5-i));
+      led(1,4,(5-i),color[0],color[1],color[2]); 
+      led(4,4,i,color[0],color[1],color[2]);
+      led(4,1,(5-i),color[0],color[1],color[2]);
       delay(time);
     }
   }
@@ -300,28 +315,30 @@ void paths(int c, int time, int type, int s){ //if type == 1 then paths change c
   c = addColor(type,c);
   colorChoice(c);
   
-  led(color[0],color[1],color[2],1,4,1);
-  led(color[0],color[1],color[2],4,4,4);
-  led(color[0],color[1],color[2],4,1,1);
+  led(1,4,1,color[0],color[1],color[2]);
+  led(4,4,4,color[0],color[1],color[2]);
+  led(4,1,1,color[0],color[1],color[2]);
+  delay(time);
   
   for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,(5-i),1);
-    led(color[0],color[1],color[2],(5-i),4,4);
-    led(color[0],color[1],color[2],4,(5-i),4);
-    led(color[0],color[1],color[2],(5-i),1,1);
+    led(1,(5-i),1,color[0],color[1],color[2]);
+    led((5-i),4,4,color[0],color[1],color[2]);
+    led(4,(5-i),4,color[0],color[1],color[2]);
+    led((5-i),1,1,color[0],color[1],color[2]);
     delay(time);
   }
   
   if(s == 0){
     colorChoice(6); 
-    led(color[0],color[1],color[2],1,4,1); 
-    led(color[0],color[1],color[2],4,4,4);
-    led(color[0],color[1],color[2],4,1,1);
+    led(1,4,1,color[0],color[1],color[2]); 
+    led(4,4,4,color[0],color[1],color[2]);
+    led(4,1,1,color[0],color[1],color[2]);
+    delay(time);
     for(int i = 2; i <= 4; i++){
-      led(color[0],color[1],color[2],1,(5-i),1);
-      led(color[0],color[1],color[2],(5-i),4,4);
-      led(color[0],color[1],color[2],4,(5-i),4);
-      led(color[0],color[1],color[2],(5-i),1,1);
+      led(1,(5-i),1,color[0],color[1],color[2]);
+      led((5-i),4,4,color[0],color[1],color[2]);
+      led(4,(5-i),4,color[0],color[1],color[2]);
+      led((5-i),1,1,color[0],color[1],color[2]);
       delay(time);
     }
   }
@@ -329,26 +346,28 @@ void paths(int c, int time, int type, int s){ //if type == 1 then paths change c
   c = addColor(type,c);
   colorChoice(c);
   
-  led(color[0],color[1],color[2],1,4,4); 
-  led(color[0],color[1],color[2],1,1,1);
-  led(color[0],color[1],color[2],4,1,4);
+  led(1,4,4,color[0],color[1],color[2]); 
+  led(1,1,1,color[0],color[1],color[2]);
+  led(4,1,4,color[0],color[1],color[2]);
+  delay(time);
   
   for(int i = 2; i <= 4; i++){
-    led(color[0],color[1],color[2],1,(5-i),4);
-    led(color[0],color[1],color[2],1,1,1);
-    led(color[0],color[1],color[2],(5-i),1,4);
+    led(1,(5-i),4,color[0],color[1],color[2]);
+    led(1,1,i,color[0],color[1],color[2]);
+    led((5-i),1,4,color[0],color[1],color[2]);
     delay(time);
   }
   
   if(s == 0){
     colorChoice(6); 
-    led(color[0],color[1],color[2],1,4,4); 
-    led(color[0],color[1],color[2],1,1,1);
-    led(color[0],color[1],color[2],4,1,4);
+    led(1,4,4,color[0],color[1],color[2]); 
+    led(1,1,1,color[0],color[1],color[2]);
+    led(4,1,4,color[0],color[1],color[2]);
+    delay(time);
     for(int i = 2; i <= 4; i++){
-      led(color[0],color[1],color[2],1,(5-i),4);
-      led(color[0],color[1],color[2],1,1,1);
-      led(color[0],color[1],color[2],(5-i),1,4);
+      led(1,(5-i),4,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
+      led((5-i),1,4,color[0],color[1],color[2]);
       delay(time);
     }
   }
