@@ -276,6 +276,30 @@ void loop() {
     cube(0,0,0);
   }
   
+  streams(4,750);
+  cube(0,0,0);
+  paths(4,100,0,0);
+  cube(0,0,0);
+  paths(4,100,1,1);
+  cube(0,0,0);
+  overPaths(100);
+  cube(0,0,0);
+  
+  for(int i = 0; i < 2; i++){
+     diagonals(0,0,4,300);
+     diagonals(0,1,4,300);
+  }
+  
+  for(int i = 0; i < 2; i++){
+    diagonals(1,0,4,300);
+    diagonals(1,1,4,300);
+  }
+  
+  for(int i = 0; i < 2; i++){
+    diagonals(2,0,4,300);
+    diagonals(2,1,4,300);
+  }
+  
   for(int i = 0; i < 6; i++){
     explode(75,i);
     delay(150);
@@ -298,6 +322,464 @@ void loop() {
   explode(100,4);
   
   delay(5000);
+}
+
+void diagonals(int axis, int dir, int c, int time){ //axis: 0 - along x, 1 - along y, 2 - along z
+  if(axis == 0){
+    if(dir == 0){
+        column(0,1,1,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,2,1,c);
+        column(0,1,2,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,3,1,c);
+        column(0,2,2,c);
+        column(0,1,3,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,4,1,c);
+        column(0,3,2,c);
+        column(0,2,3,c);
+        column(0,1,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,4,2,c);
+        column(0,3,3,c);
+        column(0,2,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,4,3,c);
+        column(0,3,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,4,4,c);
+        delay(time);
+        cube(0,0,0);
+    }
+    else if(dir == 1){
+        column(0,4,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,3,4,c);
+        column(0,4,3,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,3,3,c);
+        column(0,2,4,c);
+        column(0,4,2,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,4,1,c);
+        column(0,3,2,c);
+        column(0,2,3,c);
+        column(0,1,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,1,3,c);
+        column(0,3,1,c);
+        column(0,2,2,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,1,2,c);
+        column(0,2,1,c);
+        delay(time);
+        cube(0,0,0);
+        column(0,1,1,c);
+        delay(time);
+        cube(0,0,0);
+    }
+  }
+  else if(axis == 1){
+    if(dir == 0){
+        column(1,0,1,c);
+        delay(time);
+        cube(0,0,0);
+        column(2,0,1,c);
+        column(1,0,2,c);
+        delay(time);
+        cube(0,0,0);
+        column(3,0,1,c);
+        column(2,0,2,c);
+        column(1,0,3,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,1,c);
+        column(3,0,2,c);
+        column(2,0,3,c);
+        column(1,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,2,c);
+        column(3,0,3,c);
+        column(2,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,3,c);
+        column(3,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,4,c);
+        delay(time);
+        cube(0,0,0);
+    }
+    else if(dir == 1){
+        column(4,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,3,c);
+        column(3,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(3,0,3,c);
+        column(2,0,4,c);
+        column(4,0,2,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,0,1,c);
+        column(3,0,2,c);
+        column(2,0,3,c);
+        column(1,0,4,c);
+        delay(time);
+        cube(0,0,0);
+        column(1,0,3,c);
+        column(2,0,2,c);
+        column(3,0,1,c);
+        delay(time);
+        cube(0,0,0);
+        column(1,0,2,c);
+        column(2,0,1,c);
+        delay(time);
+        cube(0,0,0);
+        column(1,0,1,c);
+        delay(time);
+        cube(0,0,0);
+    }
+  }
+  else if(axis == 2){
+    if(dir == 0){
+        column(1,1,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(2,1,0,c);
+        column(1,2,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(3,1,0,c);
+        column(2,2,0,c);
+        column(1,3,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,1,0,c);
+        column(3,2,0,c);
+        column(2,3,0,c);
+        column(1,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,2,0,c);
+        column(3,3,0,c);
+        column(2,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,3,0,c);
+        column(3,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,4,0,c);
+        delay(time);
+        cube(0,0,0);
+    }
+    else if(dir == 1){
+        column(4,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,3,0,c);
+        column(3,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(3,3,0,c);
+        column(2,4,0,c);
+        column(4,2,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(4,1,0,c);
+        column(3,2,0,c);
+        column(2,3,0,c);
+        column(1,4,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(2,2,0,c);
+        column(3,1,0,c);
+        column(1,3,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(1,2,0,c);
+        column(2,1,0,c);
+        delay(time);
+        cube(0,0,0);
+        column(1,1,0,c);
+        delay(time);
+        cube(0,0,0);
+    }
+  }
+ }
+
+void column(int x, int y, int z, int c){ //x,y,z - whichever is 0 is cycled
+  colorChoice(c);
+  
+  if(x == 0){
+    for(int i = 1; i <= 4; i++){
+     led(i,y,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if(y == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,i,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if (z == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,y,i,color[0],color[1],color[2]); 
+    }
+  }
+}
+
+void overPaths(int time){
+  int c = 0;
+  colorChoice(c);
+  
+  for(int x = 0; x < 5; x++){
+    led(1,1,1,color[0],color[1],color[2]);
+    delay(time);
+    
+    for(int i = 2; i <= 4; i++){
+      led(i,1,1,color[0],color[1],color[2]);
+      led(1,i,1,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
+      delay(time);
+    }
+    
+    if(x > 0){
+      for(int i = 2; i <= 4; i++){
+        led(i,4,1,color[0],color[1],color[2]);
+        led(1,i,4,color[0],color[1],color[2]);
+        led(i,1,4,color[0],color[1],color[2]);
+        led(4,i,1,color[0],color[1],color[2]);
+        delay(time);
+      }
+      
+      if(x > 1){ 
+        for(int i = 2; i <= 4; i++){
+          led(1,4,(5-i),color[0],color[1],color[2]); 
+          led(4,4,i,color[0],color[1],color[2]);
+          led(4,1,(5-i),color[0],color[1],color[2]);
+          delay(time);
+        }
+        
+        if(x > 2){
+          for(int i = 2; i <= 4; i++){
+            led(1,(5-i),1,color[0],color[1],color[2]);
+            led((5-i),4,4,color[0],color[1],color[2]);
+            led(4,(5-i),4,color[0],color[1],color[2]);
+            led((5-i),1,1,color[0],color[1],color[2]);
+            delay(time);
+          }
+          
+          if(x > 3){
+            for(int i = 2; i <= 3; i++){
+              led(1,(5-i),4,color[0],color[1],color[2]);
+              led(1,1,1,color[0],color[1],color[2]);
+              led((5-i),1,4,color[0],color[1],color[2]);
+              delay(time);
+            }
+          }
+        }
+      }
+    }
+
+    c = addColor(1,c);
+    colorChoice(c);
+  }
+}
+
+void streams(int c, int time){
+ colorChoice(c);
+ for(int a = 0; a < 6; a++){
+   for(int i = 1; i <= 4; i++){
+    led(1,i,4,color[0],color[1],color[2]);
+    led(i,1,2,color[0],color[1],color[2]);
+    led(4,(5-i),3,color[0],color[1],color[2]); 
+    led(4,4,(5-i),color[0],color[1],color[2]);
+    led(2,3,i,color[0],color[1],color[2]);
+    led((5-i),3,2,color[0],color[1],color[2]);
+    led(2,(5-i),1,color[0],color[1],color[2]);
+    led(i,4,3,color[0],color[1],color[2]);
+    led(3,2,(5-i),color[0],color[1],color[2]); 
+    led(2,1,i,color[0],color[1],color[2]);
+    led(3,i,2,color[0],color[1],color[2]);
+    led((5-i),2,3,color[0],color[1],color[2]);
+    delay(time);
+    cube(0,0,0);
+   }
+ }
+}
+
+void paths(int c, int time, int type, int s){ //if type == 1 then paths change color, if s == 1, keep all on, if s == 0 turn off
+  colorChoice(c);
+  led(1,1,1,color[0],color[1],color[2]);
+  delay(time);
+  
+  for(int i = 2; i <= 4; i++){
+    led(i,1,1,color[0],color[1],color[2]);
+    led(1,i,1,color[0],color[1],color[2]);
+    led(1,1,i,color[0],color[1],color[2]);
+    delay(time);
+  }
+  
+  if(s == 0){
+    colorChoice(6); 
+    led(1,1,1,color[0],color[1],color[2]);
+    delay(time);
+    for(int i = 2; i <= 4; i++){
+      led(i,1,1,color[0],color[1],color[2]);
+      led(1,i,1,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
+      delay(time);
+    }
+  }
+  
+  c = addColor(type,c);
+  colorChoice(c);
+  
+  led(1,4,1,color[0],color[1],color[2]);
+  led(1,1,4,color[0],color[1],color[2]);
+  led(4,1,1,color[0],color[1],color[2]);
+  delay(time);
+  
+  for(int i = 2; i <= 4; i++){
+    led(i,4,1,color[0],color[1],color[2]);
+    led(1,i,4,color[0],color[1],color[2]);
+    led(i,1,4,color[0],color[1],color[2]);
+    led(4,i,1,color[0],color[1],color[2]);
+    delay(time);
+  }
+  
+  if(s == 0){
+    colorChoice(6); 
+    led(1,4,1,color[0],color[1],color[2]);
+    led(1,1,4,color[0],color[1],color[2]);
+    led(4,1,1,color[0],color[1],color[2]);
+    delay(time);
+    for(int i = 2; i <= 4; i++){
+      led(i,4,1,color[0],color[1],color[2]);
+      led(1,i,4,color[0],color[1],color[2]);
+      led(i,1,4,color[0],color[1],color[2]);
+      led(4,i,1,color[0],color[1],color[2]);
+      delay(time);
+    }
+  }
+  
+  c = addColor(type,c);
+  colorChoice(c);
+  
+  led(1,4,4,color[0],color[1],color[2]); 
+  led(4,4,1,color[0],color[1],color[2]);
+  led(4,1,4,color[0],color[1],color[2]);
+  delay(time);
+  
+  for(int i = 2; i <= 4; i++){
+    led(1,4,(5-i),color[0],color[1],color[2]); 
+    led(4,4,i,color[0],color[1],color[2]);
+    led(4,1,(5-i),color[0],color[1],color[2]);
+    delay(time);
+  }
+  
+  if(s == 0){
+    colorChoice(6); 
+    led(1,4,4,color[0],color[1],color[2]); 
+    led(4,4,1,color[0],color[1],color[2]);
+    led(4,1,4,color[0],color[1],color[2]);
+    delay(time);
+    for(int i = 2; i <= 4; i++){
+      led(1,4,(5-i),color[0],color[1],color[2]); 
+      led(4,4,i,color[0],color[1],color[2]);
+      led(4,1,(5-i),color[0],color[1],color[2]);
+      delay(time);
+    }
+  }
+  
+  c = addColor(type,c);
+  colorChoice(c);
+  
+  led(1,4,1,color[0],color[1],color[2]);
+  led(4,4,4,color[0],color[1],color[2]);
+  led(4,1,1,color[0],color[1],color[2]);
+  delay(time);
+  
+  for(int i = 2; i <= 4; i++){
+    led(1,(5-i),1,color[0],color[1],color[2]);
+    led((5-i),4,4,color[0],color[1],color[2]);
+    led(4,(5-i),4,color[0],color[1],color[2]);
+    led((5-i),1,1,color[0],color[1],color[2]);
+    delay(time);
+  }
+  
+  if(s == 0){
+    colorChoice(6); 
+    led(1,4,1,color[0],color[1],color[2]); 
+    led(4,4,4,color[0],color[1],color[2]);
+    led(4,1,1,color[0],color[1],color[2]);
+    delay(time);
+    for(int i = 2; i <= 4; i++){
+      led(1,(5-i),1,color[0],color[1],color[2]);
+      led((5-i),4,4,color[0],color[1],color[2]);
+      led(4,(5-i),4,color[0],color[1],color[2]);
+      led((5-i),1,1,color[0],color[1],color[2]);
+      delay(time);
+    }
+  }
+  
+  c = addColor(type,c);
+  colorChoice(c);
+  
+  led(1,4,4,color[0],color[1],color[2]); 
+  led(1,1,1,color[0],color[1],color[2]);
+  led(4,1,4,color[0],color[1],color[2]);
+  delay(time);
+  
+  for(int i = 2; i <= 4; i++){
+    led(1,(5-i),4,color[0],color[1],color[2]);
+    led(1,1,i,color[0],color[1],color[2]);
+    led((5-i),1,4,color[0],color[1],color[2]);
+    delay(time);
+  }
+  
+  if(s == 0){
+    colorChoice(6); 
+    led(1,4,4,color[0],color[1],color[2]); 
+    led(1,1,1,color[0],color[1],color[2]);
+    led(4,1,4,color[0],color[1],color[2]);
+    delay(time);
+    for(int i = 2; i <= 4; i++){
+      led(1,(5-i),4,color[0],color[1],color[2]);
+      led(1,1,i,color[0],color[1],color[2]);
+      led((5-i),1,4,color[0],color[1],color[2]);
+      delay(time);
+    }
+  }
+}
+
+int addColor(int yn, int orig){
+  if(yn == 0){
+   return orig; 
+  }
+  int temp;
+  temp = ++orig;
+  if(temp >= 6){
+   temp = 0; 
+  }
+  return temp;
 }
 
 void rainbow(int time){  
