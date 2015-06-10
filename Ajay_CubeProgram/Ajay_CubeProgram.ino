@@ -134,11 +134,117 @@ int firstRun = 1;
 
 void loop() {
 cube(0,0,0);
-roll(200,1);
+xyz(500,0);
 
 
  
 
+}
+void xyz(int time, int c)
+{
+ 
+column(4,4,0,c);
+
+for(int i = 1; i<5; i++)
+{
+  column(0,4,i,c);
+column(4,0,i,c);
+delay(time);
+column(0,4,i,6);
+column(4,0,i,6); 
+column(4,4,0,c);
+}
+for(int i = 3; i>0; i--)
+{
+column(0,4,i,c);
+column(4,0,i,c);
+delay(time);
+column(0,4,i,6);
+column(4,0,i,6);
+column(4,4,0,c);
+}
+column(4,4,0,6);
+column(0,4,1,c);
+for(int i = 3; i>0; i--)
+{
+column(i,4,0,c);
+column(i,0,1,c);
+delay(time);
+column(i,4,0,6);
+column(i,0,1,6);
+column(0,4,1,c);
+}
+for(int i = 2; i<5; i++)
+{
+  column(i,4,0,c);
+column(i,0,1,c);
+delay(time);
+column(i,4,0,6);
+column(i,0,1,6); 
+column(0,4,1,c);
+}
+column(0,4,1,6);
+column(4,0,1,c);
+for(int i = 3; i>0; i--)
+{
+column(0,i,1,c);
+column(4,i,0,c);
+delay(time);
+column(4,i,0,6);
+column(0,i,1,6);
+column(4,0,1,c);
+}
+for(int i = 2; i<5; i++)
+{
+  column(4,i,0,c);
+column(0,i,1,c);
+delay(time);
+column(4,i,0,6);
+column(0,i,1,6); 
+column(4,0,1,c);
+}
+
+
+  
+}
+void newroll(int time, int c)
+{
+  z_layer(1,c);
+  delay(time); 
+  column(0,4,2,c);
+  column(0,1,1,6);
+  delay(time);
+  column(0,4,3,c);
+  column(0,2,1,6);
+  delay(time);
+  column(0,4,4,c);
+  column(0,3,1,6);
+  delay(time);
+  column(0,3,4,c);
+  column(0,4,1,6);
+  delay(time);
+  column(0,2,4,c);
+  column(0,4,2,6);
+  delay(time);
+  column(0,1,4,c);
+  column(0,4,3,6);
+  delay(time);
+  column(0,1,3,c);
+  column(0,4,4,6);
+  delay(time);
+  column(0,1,2,c);
+  column(0,3,4,6);
+  delay(time);
+  column(0,1,1,c);
+  column(0,2,4,6);
+  delay(time);
+  column(0,2,1,c);
+  column(0,1,4,6);
+  delay(time);
+  column(0,3,1,c);
+  column(0,1,3,6);
+  delay(time);
+  
 }
 void outrand(int time)
 {
@@ -908,6 +1014,25 @@ void blueColor(byte colorArray[]) {
   //   colorArray[0] = colorArray[0] - 2;
   // }
   colorArray[0] = 0;
+}
+void column(int x, int y, int z, int c){ //x,y,z - whichever is 0 is cycled
+  colorChoice(c);
+  
+  if(x == 0){
+    for(int i = 1; i <= 4; i++){
+     led(i,y,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if(y == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,i,z,color[0],color[1],color[2]); 
+    }
+  }
+  else if (z == 0){
+    for(int i = 1; i <= 4; i++){
+     led(x,y,i,color[0],color[1],color[2]); 
+    }
+  }
 }
 
 void ledTest(int time) {
