@@ -133,14 +133,47 @@ ISR(TIMER1_COMPA_vect){
 int firstRun = 1;
 
 void loop() {
-cube(0,0,15);
+cube(0,0,0);
 delay(500);
-ending(100);
-delay(1000);
+for(int i = 0; i<6;i++)
+  swirl(100,i);
+delay(500);
+
 
 
  
 
+}
+void swirl(int time, int c)
+{
+  column(3,0,2,c);
+  column(3,0,1,c); 
+  delay(time);
+  column(4,0,1,c);
+  delay(time);
+  column(4,0,2,c); 
+  delay(time);
+  column(3,0,3,c);
+  column(4,0,3,c);
+  delay(time); 
+  column(4,0,4,c);
+  delay(time);
+  column(3,0,4,c); 
+  delay(time);
+  column(2,0,3,c);
+  column(2,0,4,c);
+  delay(time); 
+  column(1,0,4,c);
+  delay(time);
+  column(1,0,3,c);
+  delay(time);
+  column(2,0,2,c); 
+  column(1,0,2,c);
+  delay(time);
+  column(1,0,1,c); 
+  delay(time);
+  column(2,0,1,c);
+  delay(time);
 }
 void ending(int time)
 {
