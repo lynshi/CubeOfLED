@@ -220,22 +220,22 @@ void loop() {
   cube(0,0,0);
     
   for(int i = 0; i < 6; i++){
-    roll(250, i);
+    roll(75, i);
   }    
   cube(0,0,0);
   
   for(int i = 0; i < 6; i++){
-    colmove(250, i);
+    colmove(75, i);
+  }    
+  
+  for(int i = 0; i < 6; i++){
+    cube(0,0,0);
+    newroll(50, i);
   }    
   cube(0,0,0);
   
   for(int i = 0; i < 6; i++){
-    newroll(250, i);
-  }    
-  cube(0,0,0);
-  
-  for(int i = 0; i < 6; i++){
-    xyz(250, i);
+    xyz(100, i);
   }    
   cube(0,0,0);
     
@@ -290,7 +290,7 @@ void loop() {
 
   for(int j = 0; j < 25; j++){
     randomness(random(8,56), 0, 6);
-    delay(0);
+    delay(1000-40*j);
     cube(0,0,0);
   }
   
@@ -298,6 +298,11 @@ void loop() {
     randomness(random(0,24), 50, j);
     delay(50);
     cube(0,0,0);
+  }
+  
+  for(int i = 0; i < 6; i++){
+    explode(75,i);
+    delay(150);
   }
   
   streams(4,750);
@@ -309,24 +314,19 @@ void loop() {
   overPaths(100);
   cube(0,0,0);
   
-  for(int i = 0; i < 2; i++){
-     diagonals(0,0,4,300);
-     diagonals(0,1,4,300);
+  for(int i = 0; i < 4; i++){
+     diagonals(0,0,random(0,6),100);
+     diagonals(0,1,random(0,6),100);
   }
   
-  for(int i = 0; i < 2; i++){
-    diagonals(1,0,4,300);
-    diagonals(1,1,4,300);
+  for(int i = 0; i < 4; i++){
+    diagonals(1,0,random(0,6),100);
+    diagonals(1,1,random(0,6),100);
   }
   
-  for(int i = 0; i < 2; i++){
-    diagonals(2,0,4,300);
-    diagonals(2,1,4,300);
-  }
-  
-  for(int i = 0; i < 6; i++){
-    explode(75,i);
-    delay(150);
+  for(int i = 0; i < 4; i++){
+    diagonals(2,0,random(0,6),100);
+    diagonals(2,1,random(0,6),100);
   }
   
   breathe(0);
@@ -341,11 +341,30 @@ void loop() {
   shift(3,0,0,150);
   shift(6,1,0,200);
   shift(4,0,0,250);
-  shift(6,1,0,300);
-  
-  explode(100,4);
+  delay(500);
+  ending(100);
   
   delay(5000);
+}
+
+void ending(int time)
+{
+   for(int z =4;z>0;--z)
+   {
+      for(int y =4;y>0;--y)
+      {
+         for(int x =4;x>0;--x)
+         {
+           if(z==1)
+             time+=20;
+           if(x==1&&z==1&&y==1)
+           delay(500);
+           ledcol(x,y,z,6);
+           delay(time);
+           
+         } 
+       } 
+    }  
 }
 
 void diagonals(int axis, int dir, int c, int time){ //axis: 0 - along x, 1 - along y, 2 - along z
@@ -873,6 +892,9 @@ void overPaths(int time){
 void streams(int c, int time){
  colorChoice(c);
  for(int a = 0; a < 6; a++){
+   if(a > 1){
+    colorChoice(random(0,6)); 
+   }
    for(int i = 1; i <= 4; i++){
     led(1,i,4,color[0],color[1],color[2]);
     led(i,1,2,color[0],color[1],color[2]);
@@ -1042,7 +1064,7 @@ int addColor(int yn, int orig){
    return orig; 
   }
   int temp;
-  temp = ++orig;
+  temp = orig+1;
   if(temp >= 6){
    temp = 0; 
   }

@@ -137,22 +137,59 @@ void loop() {
     cube(0,0,0);
     firstRun = 0;
   }
+ 
   
-    streams(4,750);
-    cube(0,0,0);
-    paths(4,100,0,0);
-    cube(0,0,0);
-    paths(4,100,1,1);
-    cube(0,0,0);
-    overPaths(100);
-    cube(0,0,0);
+  for(int i = 0; i < 6; i++){
+    rotate(i, 0,50);
+  }
+  
+  for(int i = 0; i < 6; i++){
+    rotate(i, 1,50);
+  }
+}
 
-    diagonals(0,0,4,300);
-    diagonals(0,1,4,300);
-    diagonals(1,0,4,300);
-    diagonals(1,1,4,300);
-    diagonals(2,0,4,300);
-    diagonals(2,1,4,300);
+void rotate(int c, int way, int time){
+  colorChoice(c);
+  wave(c,way, time);
+  
+  if(way == 0){
+    for(int i = 0; i < 2; i++){
+      column(2,0,4,c);
+      column(2,0,3,c);
+      column(3,0,2,c);
+      column(3,0,1,c);
+      delay(time);
+      cube(0,0,0);
+      column(2,0,1,c);
+      column(2,0,2,c);
+      column(3,0,3,c);
+      column(3,0,4,c);
+      delay(time);
+      cube(0,0,0);
+      if(i == 0){
+        wave(c,way, time);
+      }
+    }
+  }
+  else if(way == 1){
+    for(int i = 0; i < 2; i++){
+      column(2,0,1,c);
+      column(2,0,2,c);
+      column(3,0,3,c);
+      column(3,0,4,c);
+      delay(time);
+      cube(0,0,0);
+      column(2,0,4,c);
+      column(2,0,3,c);
+      column(3,0,2,c);
+      column(3,0,1,c);
+      delay(time);
+      cube(0,0,0);
+      if(i == 0){
+        wave(c,way, time);
+      }
+    }
+  }
 }
 
 void diagonals(int axis, int dir, int c, int time){ //axis: 0 - along x, 1 - along y, 2 - along z
@@ -668,8 +705,7 @@ void shift(int c, int way, int type){
   }
 }
 
-void wave(int c, int way){
-  int time = 100;
+void wave(int c, int way, int time){
   int x, z;
   
   colorChoice(c);
@@ -686,9 +722,6 @@ void wave(int c, int way){
     
     x = waveControl(way);
     for(z = 1; z <= 4; z++){
-        if(z == 1 && a == 1){
-         continue; 
-        }
         for(int y = 1; y <= 4; y++){
           led(x, y, z, color[0], color[1], color[2]);
         }
