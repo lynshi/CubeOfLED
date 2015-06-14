@@ -134,7 +134,11 @@ int firstRun = 1;
 
 void loop() {
 cube(0,0,0);
-xyz(500,0);
+newroll(500,0);
+delay(500);
+cube(0,0,0);
+roll(500,0);
+delay(500);
 
 
  
