@@ -199,25 +199,44 @@ void loop() {
     shift(4,3,1,100);
   }
   
-   for(int i = 0; i < 6; i++){
-     if(i % 2 == 0 || i == 0){
-       shift(i,2,1,100);
-     }
-     else{
-       shift(i,3,1,100);
-     }
-   } 
+  for(int i = 0; i < 6; i++){
+    if(i % 2 == 0 || i == 0){
+      shift(i,2,1,100);
+    }
+    else{
+      shift(i,3,1,100);
+    }
+  } 
 
-   for(int i = 0; i < 6; i++){
-     if(i % 2 == 0 || i == 0){
-       shift(i,0,1,100);
-     }
-     else{
-       shift(i,1,1,100);
-     }
-   } 
+  for(int i = 0; i < 6; i++){
+    if(i % 2 == 0 || i == 0){
+      shift(i,0,1,100);
+    }
+    else{
+      shift(i,1,1,100);
+    }
+  } 
 
+  cube(0,0,0);
+    
+  for(int i = 0; i < 6; i++){
+    roll(250, i);
+  }    
+  cube(0,0,0);
   
+  for(int i = 0; i < 6; i++){
+    colmove(250, i);
+  }    
+  cube(0,0,0);
+  
+  for(int i = 0; i < 6; i++){
+    newroll(250, i);
+  }    
+  cube(0,0,0);
+  
+  for(int i = 0; i < 6; i++){
+    xyz(250, i);
+  }    
   cube(0,0,0);
     
   wave(0,0);
@@ -249,6 +268,11 @@ void loop() {
   revdiag(75,0,15,0);
   diag(75,0,0,15);
   revdiag(75,0,0,0);
+  
+  for(int i = 0; i < 10; i++){
+   outrand(250); 
+   cube(0,0,0);
+  }
 
   for(int i = 0; i < 2; i++){
     for(int j = 0; j < 6; j++){
@@ -524,6 +548,249 @@ void diagonals(int axis, int dir, int c, int time){ //axis: 0 - along x, 1 - alo
     }
   }
  }
+
+void xyz(int time, int c)
+{
+   
+  column(4,4,0,c);
+  
+  for(int i = 1; i<5; i++)
+  {
+    column(0,4,i,c);
+    column(4,0,i,c);
+    delay(time);
+    column(0,4,i,6);
+    column(4,0,i,6); 
+    column(4,4,0,c);
+  }
+  for(int i = 3; i>0; i--)
+  {
+    column(0,4,i,c);
+    column(4,0,i,c);
+    delay(time);
+    column(0,4,i,6);
+    column(4,0,i,6);
+    column(4,4,0,c);
+  }
+  column(4,4,0,6);
+  column(0,4,1,c);
+  for(int i = 3; i>0; i--)
+  {
+    column(i,4,0,c);
+    column(i,0,1,c);
+    delay(time);
+    column(i,4,0,6);
+    column(i,0,1,6);
+    column(0,4,1,c);
+  }
+  for(int i = 2; i<5; i++)
+  {
+    column(i,4,0,c);
+    column(i,0,1,c);
+    delay(time);
+    column(i,4,0,6);
+    column(i,0,1,6); 
+    column(0,4,1,c);
+  }
+  column(0,4,1,6);
+  column(4,0,1,c);
+  for(int i = 3; i>0; i--)
+  {
+    column(0,i,1,c);
+    column(4,i,0,c);
+    delay(time);
+    column(4,i,0,6);
+    column(0,i,1,6);
+    column(4,0,1,c);
+  }
+  for(int i = 2; i<5; i++)
+  {
+    column(4,i,0,c);
+    column(0,i,1,c);
+    delay(time);
+    column(4,i,0,6);
+    column(0,i,1,6); 
+    column(4,0,1,c);
+}
+
+
+  
+}
+
+void newroll(int time, int c)
+{
+  z_layer(1,c);
+  delay(time); 
+  column(0,4,2,c);
+  column(0,1,1,6);
+  delay(time);
+  column(0,4,3,c);
+  column(0,2,1,6);
+  delay(time);
+  column(0,4,4,c);
+  column(0,3,1,6);
+  delay(time);
+  column(0,3,4,c);
+  column(0,4,1,6);
+  delay(time);
+  column(0,2,4,c);
+  column(0,4,2,6);
+  delay(time);
+  column(0,1,4,c);
+  column(0,4,3,6);
+  delay(time);
+  column(0,1,3,c);
+  column(0,4,4,6);
+  delay(time);
+  column(0,1,2,c);
+  column(0,3,4,6);
+  delay(time);
+  column(0,1,1,c);
+  column(0,2,4,6);
+  delay(time);
+  column(0,2,1,c);
+  column(0,1,4,6);
+  delay(time);
+  column(0,3,1,c);
+  column(0,1,3,6);
+  delay(time);
+}
+
+void outrand(int time)
+{
+  for(int i = 0; i<2; i++)
+  {
+   led(1, random(1,5),random(1,5),random(5,16),random(5,16),random(5,16));
+   led(random(1,5),1 ,random(1,5),random(5,16),random(5,16),random(5,16));
+   delay(time);
+   cube(0,0,0);
+   led(4, random(1,5),random(1,5),random(5,16),random(5,16),random(5,16));
+   led(random(1,5), 4,random(1,5),random(5,16),random(5,16),random(5,16) );
+   delay(time);
+  }
+  
+  
+}
+
+void roll(int time, int c)
+{
+  int x = 1;
+  int y = 1;
+
+    for(y;y<5;y++)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
+    for(x=2;x<5;x++)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
+
+    for(y=3;y>0;y--)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    }
+    
+
+    for(x=3;x>0;x--)
+    {
+      ledcol(x,1,y,c); 
+      ledcol(x,2,y,c);
+      ledcol(x,3,y,c);
+      ledcol(x,4,y,c);
+      delay(time);
+      ledcol(x,1,y,6); 
+      ledcol(x,2,y,6);
+      ledcol(x,3,y,6);
+      ledcol(x,4,y,6);
+    } 
+}
+
+void colmove(int time, int c)
+{
+  int x = 1;
+  int y = 1;
+
+    for(y;y<5;y++)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+    for(x=2;x<5;x++)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+
+    for(y=3;y>0;y--)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    }
+    
+
+    for(x=3;x>0;x--)
+    {
+      ledcol(x,y,1,c); 
+      ledcol(x,y,2,c);
+      ledcol(x,y,3,c);
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,1,6); 
+      ledcol(x,y,2,6);
+      ledcol(x,y,3,6);
+      ledcol(x,y,4,6);
+    } 
+}
 
 void column(int x, int y, int z, int c){ //x,y,z - whichever is 0 is cycled
   colorChoice(c);
