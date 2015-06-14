@@ -135,8 +135,8 @@ int firstRun = 1;
 void loop() {
 cube(0,0,0);
 delay(500);
-for(int i = 0; i<6;i++)
-  swirl(100,i);
+ledswirl(50,0,0);
+ledswirl(50,4,1);
 delay(500);
 
 
@@ -144,35 +144,68 @@ delay(500);
  
 
 }
-void ledswirl(int time, int c)
+void ledswirl(int time, int c, int dir)
 {
-  for(int y = 1; y<5; y++);
+  if(dir == 1)
+  {
+  for(int y = 1; y<5; y++)
   {
     for(int x = 1; x<5; x++)
     {
-      ledcol(x,y,z,c);
+      ledcol(x,y,1,c);
       delay(time);
-      ledcol(x,y,z,6);    
+      ledcol(x,y,1,6);    
     }
     for(int z = 1; z<5; z++)
     {
-      ledcol(x,y,z,c);
+      ledcol(4,y,z,c);
       delay(time);
-      ledcol(x,y,z,6);    
+      ledcol(4,y,z,6);    
     }
     for(int x = 4; x>0; x--)
     {
-      ledcol(x,y,z,c);
+      ledcol(x,y,4,c);
       delay(time);
-      ledcol(x,y,z,6);   
+      ledcol(x,y,4,6);   
     }
     for(int z = 4; z>0; z--)
     {
-      ledcol(x,y,z,c);
+      ledcol(1,y,z,c);
       delay(time);
-      ledcol(x,y,z,6); 
+      ledcol(1,y,z,6); 
     }  
    }  
+  }
+  if(dir == 0)
+  {
+  for(int y = 4; y>0; y--)
+  {
+    for(int x = 1; x<5; x++)
+    {
+      ledcol(x,y,1,c);
+      delay(time);
+      ledcol(x,y,1,6);    
+    }
+    for(int z = 1; z<5; z++)
+    {
+      ledcol(4,y,z,c);
+      delay(time);
+      ledcol(4,y,z,6);    
+    }
+    for(int x = 4; x>0; x--)
+    {
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,4,6);   
+    }
+    for(int z = 4; z>0; z--)
+    {
+      ledcol(1,y,z,c);
+      delay(time);
+      ledcol(1,y,z,6); 
+    }  
+   }  
+  }
 }
 void swirl(int time, int c)
 {
