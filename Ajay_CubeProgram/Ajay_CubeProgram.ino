@@ -144,6 +144,36 @@ delay(500);
  
 
 }
+void ledswirl(int time, int c)
+{
+  for(int y = 1; y<5; y++);
+  {
+    for(int x = 1; x<5; x++)
+    {
+      ledcol(x,y,z,c);
+      delay(time);
+      ledcol(x,y,z,6);    
+    }
+    for(int z = 1; z<5; z++)
+    {
+      ledcol(x,y,z,c);
+      delay(time);
+      ledcol(x,y,z,6);    
+    }
+    for(int x = 4; x>0; x--)
+    {
+      ledcol(x,y,z,c);
+      delay(time);
+      ledcol(x,y,z,6);   
+    }
+    for(int z = 4; z>0; z--)
+    {
+      ledcol(x,y,z,c);
+      delay(time);
+      ledcol(x,y,z,6); 
+    }  
+   }  
+}
 void swirl(int time, int c)
 {
   column(3,0,2,c);
