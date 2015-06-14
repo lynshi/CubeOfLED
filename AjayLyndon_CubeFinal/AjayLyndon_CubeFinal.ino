@@ -148,6 +148,17 @@ void loop() {
    rainbow(550-250*i); 
   }
   
+  swirl(100,6);
+  
+  for(int i = 0; i < 6; i++){
+    if(i % 2 == 0 || i == 0){
+      ledswirl(20,i,0);
+    }
+    else{
+      ledswirl(20,i,1);
+    }
+  }
+  
   cube(0,0,0);
   shift(0,0,0,100);
   cube(0,0,0);
@@ -234,25 +245,35 @@ void loop() {
   }    
   cube(0,0,0);
   
-  for(int i = 0; i < 6; i++){
-    xyz(100, i);
+  for(int i = 0; i < 3; i++){
+    xyz(100, random(0,6));
   }    
   cube(0,0,0);
     
-  wave(0,0);
-  wave(0,1);
-  wave(3,0);
-  wave(3,1);
-  wave(4,0);
-  wave(4,1);
+  wave(0,0,100);
+  wave(0,1,100);
+  wave(3,0,100);
+  wave(3,1,100);
+  wave(4,0,100);
+  wave(4,1,100);
     
   for(int i = 0; i < 6; i++){
     if(i % 2 == 0 || i == 0){
-      wave(i, 0);
+      wave(i,0,100);
     }
     else{
-      wave(i, 1);
+      wave(i,1,100);
     }
+  }
+  
+  for(int a = 0; a < 2; a++){
+   for(int b = 0; b < 6; b++){
+    rotate(b,a,50);
+   } 
+  }
+  
+  for(int i = 0; i < 6; i++){
+   swirl(75,i); 
   }
   
   diag(75,15,0,0);
@@ -294,6 +315,12 @@ void loop() {
     cube(0,0,0);
   }
   
+  for(int i = 0; i < 20; i++){
+    randomness(random(8,56), 0, 6);
+    delay(10);
+    cube(0,0,0);
+  }
+  
   for(int j = 0; j < 6; j++){
     randomness(random(0,24), 50, j);
     delay(50);
@@ -329,6 +356,8 @@ void loop() {
     diagonals(2,1,random(0,6),100);
   }
   
+  delay(500);
+  
   breathe(0);
   delay(500);
   breathe(1);
@@ -345,6 +374,102 @@ void loop() {
   ending(100);
   
   delay(5000);
+}
+
+void ledswirl(int time, int c, int dir)
+{
+  if(dir == 1)
+  {
+  for(int y = 1; y<5; y++)
+  {
+    for(int x = 1; x<5; x++)
+    {
+      ledcol(x,y,1,c);
+      delay(time);
+      ledcol(x,y,1,6);    
+    }
+    for(int z = 1; z<5; z++)
+    {
+      ledcol(4,y,z,c);
+      delay(time);
+      ledcol(4,y,z,6);    
+    }
+    for(int x = 4; x>0; x--)
+    {
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,4,6);   
+    }
+    for(int z = 4; z>0; z--)
+    {
+      ledcol(1,y,z,c);
+      delay(time);
+      ledcol(1,y,z,6); 
+    }  
+   }  
+  }
+  if(dir == 0)
+  {
+  for(int y = 4; y>0; y--)
+  {
+    for(int x = 1; x<5; x++)
+    {
+      ledcol(x,y,1,c);
+      delay(time);
+      ledcol(x,y,1,6);    
+    }
+    for(int z = 1; z<5; z++)
+    {
+      ledcol(4,y,z,c);
+      delay(time);
+      ledcol(4,y,z,6);    
+    }
+    for(int x = 4; x>0; x--)
+    {
+      ledcol(x,y,4,c);
+      delay(time);
+      ledcol(x,y,4,6);   
+    }
+    for(int z = 4; z>0; z--)
+    {
+      ledcol(1,y,z,c);
+      delay(time);
+      ledcol(1,y,z,6); 
+    }  
+   }  
+  }
+}
+
+void swirl(int time, int c)
+{
+  column(3,0,2,c);
+  column(3,0,1,c); 
+  delay(time);
+  column(4,0,1,c);
+  delay(time);
+  column(4,0,2,c); 
+  delay(time);
+  column(3,0,3,c);
+  column(4,0,3,c);
+  delay(time); 
+  column(4,0,4,c);
+  delay(time);
+  column(3,0,4,c); 
+  delay(time);
+  column(2,0,3,c);
+  column(2,0,4,c);
+  delay(time); 
+  column(1,0,4,c);
+  delay(time);
+  column(1,0,3,c);
+  delay(time);
+  column(2,0,2,c); 
+  column(1,0,2,c);
+  delay(time);
+  column(1,0,1,c); 
+  delay(time);
+  column(2,0,1,c);
+  delay(time);
 }
 
 void ending(int time)
@@ -365,6 +490,50 @@ void ending(int time)
          } 
        } 
     }  
+}
+
+void rotate(int c, int way, int time){
+  colorChoice(c);
+  wave(c,way, time);
+  
+  if(way == 0){
+    for(int i = 0; i < 2; i++){
+      column(2,0,4,c);
+      column(2,0,3,c);
+      column(3,0,2,c);
+      column(3,0,1,c);
+      delay(time);
+      cube(0,0,0);
+      column(2,0,1,c);
+      column(2,0,2,c);
+      column(3,0,3,c);
+      column(3,0,4,c);
+      delay(time);
+      cube(0,0,0);
+      if(i == 0){
+        wave(c,way, time);
+      }
+    }
+  }
+  else if(way == 1){
+    for(int i = 0; i < 2; i++){
+      column(2,0,1,c);
+      column(2,0,2,c);
+      column(3,0,3,c);
+      column(3,0,4,c);
+      delay(time);
+      cube(0,0,0);
+      column(2,0,4,c);
+      column(2,0,3,c);
+      column(3,0,2,c);
+      column(3,0,1,c);
+      delay(time);
+      cube(0,0,0);
+      if(i == 0){
+        wave(c,way, time);
+      }
+    }
+  }
 }
 
 void diagonals(int axis, int dir, int c, int time){ //axis: 0 - along x, 1 - along y, 2 - along z
@@ -1125,8 +1294,7 @@ void shift(int c, int way, int type, int time){
   }
 }
 
-void wave(int c, int way){
-  int time = 100;
+void wave(int c, int way, int time){
   int x, z;
   
   colorChoice(c);
@@ -1143,9 +1311,6 @@ void wave(int c, int way){
     
     x = waveControl(way);
     for(z = 1; z <= 4; z++){
-        if(z == 1 && a == 1){
-         continue; 
-        }
         for(int y = 1; y <= 4; y++){
           led(x, y, z, color[0], color[1], color[2]);
         }
