@@ -133,16 +133,33 @@ ISR(TIMER1_COMPA_vect){
 int firstRun = 1;
 
 void loop() {
-cube(0,0,0);
-newroll(500,0);
+cube(0,0,15);
 delay(500);
-cube(0,0,0);
-roll(500,0);
-delay(500);
+ending(100);
+delay(1000);
 
 
  
 
+}
+void ending(int time)
+{
+   for(int z =4;z>0;--z)
+   {
+      for(int y =4;y>0;--y)
+      {
+         for(int x =4;x>0;--x)
+         {
+           if(z==1)
+             time+=20;
+           if(x==1&&z==1&&y==1)
+           delay(500);
+           ledcol(x,y,z,6);
+           delay(time);
+           
+         } 
+       } 
+    }  
 }
 void xyz(int time, int c)
 {
