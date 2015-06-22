@@ -135,9 +135,8 @@ int firstRun = 1;
 void loop() {
 cube(0,0,0);
 delay(500);
-ledswirl(50,0,0);
-ledswirl(50,4,1);
-delay(500);
+cube(0,0,10);
+delay(5000);
 
 
 
