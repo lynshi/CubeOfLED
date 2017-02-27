@@ -3,3 +3,6 @@ Code for controlling a 4x4x4 RGB LED cube using an Arduino.  Functions used to s
 
 ### Video Link
 https://youtu.be/4fL2t-lHI4I
+
+### Devpost
+https://devpost.com/software/cubeofled
